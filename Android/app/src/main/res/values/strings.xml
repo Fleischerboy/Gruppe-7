@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_up_with_your_email_and_mobile_to_register">Sign Up with your Email and Mobile to register</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="fullName">FullName</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="already_have_an_account_sign_in">Already have an account? <b><font color="#00000">Sign In </font></b></string>
+    <string name="please_login_with_your_email_and_password_to_continue">Please login with your Email and Password to continue</string>
+    <string name="don_t_have_an_account_sign_up">Don\'t have an account? <b><font color="00000">Sign Up</font></b> </string>
 </resources>
