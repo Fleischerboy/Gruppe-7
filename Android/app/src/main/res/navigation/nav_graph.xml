@@ -14,6 +14,7 @@
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="org.example.kotlin.android.app.LoginFragment"
@@ -26,9 +27,19 @@
             android:id="@+id/action_loginFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/profileFragment"
         android:name="org.example.kotlin.android.app.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <argument
+            android:name="email"
+            app:argType="string"
+            android:defaultValue="fred.stein@hotmail.com" />
+        <argument
+            android:name="Fullname"
+            app:argType="string"
+            android:defaultValue="Fredrik Johnsen" />
+    </fragment>
 </navigation>
