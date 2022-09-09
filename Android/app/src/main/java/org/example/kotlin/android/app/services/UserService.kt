@@ -1,8 +1,6 @@
 package org.example.kotlin.android.app.services
 
-import android.app.Activity
-import com.google.android.material.internal.ContextUtils.getActivity
-import org.example.kotlin.android.app.api.UserApi
+import org.example.kotlin.android.app.restapi.ApiInterface
 import org.example.kotlin.android.app.models.SignIn
 import org.example.kotlin.android.app.models.UserInfo
 import org.example.kotlin.android.app.retrofit.RetrofitClient
@@ -11,11 +9,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class UserRestApiService {
+class UserService {
 
 
         fun signIn(userSignInData: SignIn, onResult: (UserInfo?) -> Unit) {
-        val userLogin = RetrofitClient.buildService(UserApi::class.java);
+        val userLogin = RetrofitClient.buildService(ApiInterface::class.java);
         userLogin.signIn(userSignInData).enqueue(
             object : Callback<UserInfo> {
                 override fun onResponse(call: Call<UserInfo>, response: Response<UserInfo>) {

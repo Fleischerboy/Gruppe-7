@@ -4,6 +4,8 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
+//object is a special class that only has one instance (aka singleton)
 object RetrofitClient {
 
     private val client = OkHttpClient.Builder().build()

@@ -10,10 +10,8 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
-import org.example.kotlin.android.app.api.UserApi
 import org.example.kotlin.android.app.models.SignIn
-import org.example.kotlin.android.app.retrofit.RetrofitClient
-import org.example.kotlin.android.app.services.UserRestApiService
+import org.example.kotlin.android.app.services.UserService
 
 
 class LoginFragment : Fragment() {
@@ -48,7 +46,7 @@ class LoginFragment : Fragment() {
 
         //ClickListeners
         signInBtn.setOnClickListener { it ->
-            val userApiService = UserRestApiService();
+            val userApiService = UserService();
             val navController = it.findNavController();
             val userLoginInfo = SignIn(
                 userEmail = "philip.eiler@hotmail.com",
