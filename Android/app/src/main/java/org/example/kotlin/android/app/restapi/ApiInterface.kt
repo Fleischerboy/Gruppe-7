@@ -13,6 +13,7 @@ interface ApiInterface {
      fun signUp(@Body userSignUpData: SignUp): Call<UserInfo>
 
 
+
     @POST("signin")
      fun signIn(@Body userSignInData: SignIn): Call<UserInfo>
 

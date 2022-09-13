@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/utforsk"
+          android:icon="@drawable/ic_baseline_home_24"
+        android:id="@+id/utforsk"/>
+
+
+    <item android:title="@string/selg"
+        android:icon="@drawable/ic_baseline_photo_camera_24"
+        android:id="@+id/selg"/>
+
+    <item android:title="@string/innboks"
+        android:icon="@drawable/ic_baseline_mail_24"
+        android:id="@+id/mail"/>
+
+    <item android:title="@string/profil"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:id="@+id/profile"/>
+</menu>
