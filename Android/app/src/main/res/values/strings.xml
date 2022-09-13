@@ -12,4 +12,8 @@
     <string name="please_login_with_your_email_and_password_to_continue">Please login with your Email and Password to continue</string>
     <string name="don_t_have_an_account_sign_up">Don\'t have an account? <b><font color="00000">Sign Up</font></b> </string>
     <string name="welcome">Welcome</string>
+    <string name="utforsk">Utforsk</string>
+    <string name="selg">Selg</string>
+    <string name="innboks">Innboks</string>
+    <string name="profil">Profil</string>
 </resources>

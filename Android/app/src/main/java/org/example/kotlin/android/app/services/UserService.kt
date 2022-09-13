@@ -21,7 +21,9 @@ class UserService {
                         val userInfo = response.body();
                         onResult(userInfo);
                     }
-
+                    else {
+                        println("not successful")
+                    }
                 }
                 override fun onFailure(call: Call<UserInfo>, t: Throwable) {
                     println("error: " + t.message);
