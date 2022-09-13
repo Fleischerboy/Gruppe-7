@@ -39,8 +39,21 @@ function findUserById(id) {
   });
 }
 
+
+const getUserProductsById = (id) => {
+  
+}
+
+
+
+
+
 module.exports = {
   findUserByEmail,
   createUser,
   findUserById,
+  getUserProductsById,
 };
+
+
+
