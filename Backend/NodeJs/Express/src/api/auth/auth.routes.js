@@ -34,8 +34,7 @@ router.post("/signup", async (req, res, next) => {
     // if user is created successfully
     if (user != null) {
       res.status(200).json(user);
-    }
-    else {
+    } else {
       res.status(400);
     }
   } catch (err) {
@@ -43,8 +42,6 @@ router.post("/signup", async (req, res, next) => {
   }
 });
 
-
-  
 router.post("/signin", async (req, res, next) => {
   // Extracting password and email from request
   const { email, password } = req.body;
@@ -63,23 +60,18 @@ router.post("/signin", async (req, res, next) => {
       checkHashPassword(password, getUser.salt).passwordHash))
   ) {
     // create token
-    const token = jwt.sign(
-      {user_id: getUser.id},
-      process.env.TOKEN_KEY,
-      {
-          expiresIn: "10h",
-      }
-  );
-  
-    const {id, fullname, email, createdAt, updatedAt} = getUser;
+    const token = jwt.sign({ user_id: getUser.id }, process.env.TOKEN_KEY, {
+      expiresIn: "10h",
+    });
+
+    const { id, fullname, email, createdAt, updatedAt } = getUser;
     res.status(200).json({
       id: id,
       fullname: fullname,
       email: email,
       createdAt: createdAt,
       updatedAt: updatedAt,
-      token: token
-
+      token: token,
     });
   } else {
     return res.status(401).json({

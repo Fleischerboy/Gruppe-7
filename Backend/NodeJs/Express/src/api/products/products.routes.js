@@ -10,7 +10,7 @@ router.get("/products", async (req, res, next) => {
   try {
     const products = await getAllProducts();
     if (products != null) {
-        res.json(products);
+      res.json(products);
     }
   } catch (err) {
     next();
