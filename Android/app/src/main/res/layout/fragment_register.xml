@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightGray"
-    tools:context=".RegisterFragment">
+    tools:context=".ui.auth.RegisterFragment">
 
     <TextView
         android:id="@+id/tvCreateNewAccount"

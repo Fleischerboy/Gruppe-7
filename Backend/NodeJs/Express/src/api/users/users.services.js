@@ -34,8 +34,14 @@ function createUser(user) {
 function findUserById(id) {
   return db.user.findUnique({
     where: {
-      id,
+      id: parseInt(id)
     },
+    select: {
+        id: true,
+        fullname: true,
+        email: true,
+        createdAt: true
+    }
   });
 }
 
