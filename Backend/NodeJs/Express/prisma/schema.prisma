@@ -11,6 +11,9 @@ datasource db {
 }
 
 
+
+
+
 model User {
   @@map("user")
   id    Int     @id @default(autoincrement())
