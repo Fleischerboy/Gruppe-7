@@ -16,6 +16,7 @@ const sha512 = (password, salt) => {
     };
 }
 
+
 const saltHashPassword = (userPassword) => {
     const salt = genRandomString(16); // generate random string with 16 character
     return sha512(userPassword, salt);
