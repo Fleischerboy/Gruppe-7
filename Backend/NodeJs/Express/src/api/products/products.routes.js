@@ -6,8 +6,15 @@ const {
   getAllProducts,
 } = require("../products/products.service");
 
-router.get("/products", async (req, res) => {
-  res.send("user products");
+router.get("/products", async (req, res, next) => {
+  try {
+    const products = await getAllProducts();
+    if (products != null) {
+        res.json(products);
+    }
+  } catch (err) {
+    next();
+  }
 });
 
 router.post("/users/:userId/createProduct", auth, async (req, res, next) => {
@@ -35,7 +42,6 @@ router.post("/users/:userId/createProduct", auth, async (req, res, next) => {
     } else {
       res.status(400);
     }
-
   } catch (err) {
     next(err);
   }

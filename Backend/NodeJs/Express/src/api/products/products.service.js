@@ -1,7 +1,9 @@
 const { db } = require("../../utils/db");
 const auth = require('../middleware/auth');
-const getAllProducts = () => {
 
+
+const getAllProducts = () => {
+    return db.product.findMany()
 }
 
 
