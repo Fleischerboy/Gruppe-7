@@ -1,0 +1,27 @@
+const { db } = require("../../utils/db");
+const auth = require('../middleware/auth');
+const getAllProducts = () => {
+
+}
+
+
+
+const createProduct = (user) => {
+    const {userId, title, imageUrl, description, address} = user;
+    return db.product.create({
+        data: {
+        ownerId: parseInt(userId),
+        title: title,
+        imageUrl: imageUrl,
+        description: description,
+        address: address
+        }
+    });
+}
+
+
+
+module.exports = {
+    createProduct,
+    getAllProducts
+}

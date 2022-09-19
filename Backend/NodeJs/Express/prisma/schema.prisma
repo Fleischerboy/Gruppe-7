@@ -39,18 +39,8 @@ model Product {'
   imageUrl String @db.VarChar(2080)
   description String @db.VarChar(1000)
   address String @db.VarChar(100)
-  Location Product_Location?
-
 }
 
-model Product_Location {
-  @@map("product_location")
-  id    Int    @id @default(autoincrement())
-  product Product @relation(fields: [productId], references: [id])
-  productId Int @unique
-  latitud Decimal
-  longitude Decimal
-}
 
 
 

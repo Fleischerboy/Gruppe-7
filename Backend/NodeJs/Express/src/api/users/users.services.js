@@ -15,7 +15,8 @@ function findUserByEmail(email) {
 }
 
 function createUser(user) {
-  const hash_data = saltHashPassword(user.password);
+  const {fullname, email, password} = user;
+  const hash_data = saltHashPassword(password);
   const passwordHash = hash_data.passwordHash;
   const salt = hash_data.salt;
   // make unique id
@@ -23,8 +24,8 @@ function createUser(user) {
   return db.user.create({
     data: {
       unique_id: uid,
-      fullname: user.fullname,
-      email: user.email.toLowerCase(),
+      fullname: fullname,
+      email: email.toLowerCase(),
       encrypted_password: passwordHash,
       salt: salt,
     }
