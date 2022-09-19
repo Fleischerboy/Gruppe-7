@@ -1,4 +1,4 @@
-package org.example.kotlin.android.app.models
+package org.example.kotlin.android.app.data.requestsBody
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,14 +1,14 @@
-package org.example.kotlin.android.app
+package org.example.kotlin.android.app.ui.auth
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.navigation.findNavController
+import org.example.kotlin.android.app.R
 
 
 class RegisterFragment : Fragment() {
@@ -38,9 +38,12 @@ class RegisterFragment : Fragment() {
 
         //
         signIn.setOnClickListener {
+            /*
             val navController = it.findNavController();
             val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment();
             navController.navigate(action);
+
+             */
         }
     }
 }

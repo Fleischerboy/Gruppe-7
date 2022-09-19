@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
 const { checkHashPassword } = require("../../utils/passwordHash");
 const {
   findUserByEmail,
@@ -43,7 +44,7 @@ router.post("/signup", async (req, res, next) => {
 });
 
 
-
+  
 router.post("/signin", async (req, res, next) => {
   // Extracting password and email from request
   const { email, password } = req.body;
@@ -55,21 +56,33 @@ router.post("/signin", async (req, res, next) => {
   }
 
   const getUser = await findUserByEmail(email);
-85
+
   if (
     getUser &&
     (await (getUser.encrypted_password ===
       checkHashPassword(password, getUser.salt).passwordHash))
   ) {
-
-    const {id, fullname, email} = getUser;
+    // create token
+    const token = jwt.sign(
+      {user_id: getUser.id},
+      process.env.TOKEN_KEY,
+      {
+          expiresIn: "10h",
+      }
+  );
+  
+    const {id, fullname, email, createdAt, updatedAt} = getUser;
     res.status(200).json({
       id: id,
       fullname: fullname,
-      email: email
+      email: email,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+      token: token
+
     });
   } else {
-    return res.status(400).json({
+    return res.status(401).json({
       msg: "Wrong email or password",
     });
   }

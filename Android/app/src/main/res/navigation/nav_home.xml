@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/profileFragment">
+
+    <fragment
+        android:id="@+id/exploreFragment"
+        android:name="org.example.kotlin.android.app.ui.home.explore.ExploreFragment"
+        android:label="Explore"
+        tools:layout="@layout/fragment_explore" />
+    <fragment
+        android:id="@+id/inboxFragment"
+        android:name="org.example.kotlin.android.app.ui.home.inbox.InboxFragment"
+        android:label="Inbox"
+        tools:layout="@layout/fragment_inbox" />
+    <fragment
+        android:id="@+id/sellFragment"
+        android:name="org.example.kotlin.android.app.ui.home.sell.SellFragment"
+        android:label="Sell"
+        tools:layout="@layout/fragment_sell" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="org.example.kotlin.android.app.ui.home.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
