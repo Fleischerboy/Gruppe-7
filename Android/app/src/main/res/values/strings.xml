@@ -16,4 +16,6 @@
     <string name="selg">Selg</string>
     <string name="innboks">Innboks</string>
     <string name="profil">Profil</string>
+    <string name="header">Header</string>
+    <string name="description">description</string>
 </resources>

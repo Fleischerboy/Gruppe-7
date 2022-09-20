@@ -1,32 +1,69 @@
 package org.example.kotlin.android.app.ui.home.explore
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import org.example.kotlin.android.app.data.repository.ProductRepository
+import org.example.kotlin.android.app.data.responses.ProductResponse
+import org.example.kotlin.android.app.data.restapi.ProductApi
+import org.example.kotlin.android.app.data.restapi.Resource
 import org.example.kotlin.android.app.databinding.FragmentExploreBinding
+import org.example.kotlin.android.app.ui.base.BaseFragment
+import org.example.kotlin.android.app.ui.handleApiError
+import org.example.kotlin.android.app.ui.visible
 
 
-class ExploreFragment : Fragment() {
-
-    private var _binding: FragmentExploreBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
-        _binding = FragmentExploreBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+class ExploreFragment : BaseFragment<ExploreViewModel, FragmentExploreBinding, ProductRepository>() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvExplore.text = "Explore Fragment!!!"
+        binding.exploreProgressBar.visible(true);
+        viewModel.getAllProducts()
+        val productAdapter = ProductListAdapter()
+
+
+        binding.apply {
+            binding.RecyclerViewProducts.apply {
+                adapter = productAdapter
+                layoutManager = LinearLayoutManager(context)
+            }
+            viewModel.products.observe(viewLifecycleOwner) {
+                when(it) {
+                    is Resource.Success -> {
+                        binding.exploreProgressBar.visible(false);
+                        productAdapter.submitList(it.value.toList())
+                    }
+                    is Resource.Failure -> {
+                        handleApiError(it)
+                    }
+                }
+
+            }
+        }
+
+
+
+
 
     }
+
+
+
+    override fun getViewModel(): Class<ExploreViewModel> = ExploreViewModel::class.java
+
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentExploreBinding = FragmentExploreBinding.inflate(inflater, container, false)
+
+    override fun getFragmentRepository(): ProductRepository {
+        val api = remoteDataSource.buildServiceApi(ProductApi::class.java)
+        return ProductRepository(api)
+    }
+
+
 }
