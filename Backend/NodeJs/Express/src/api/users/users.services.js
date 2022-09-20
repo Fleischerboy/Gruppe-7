@@ -15,7 +15,8 @@ function findUserByEmail(email) {
 }
 
 function createUser(user) {
-  const hash_data = saltHashPassword(user.password);
+  const { fullname, email, password } = user;
+  const hash_data = saltHashPassword(password);
   const passwordHash = hash_data.passwordHash;
   const salt = hash_data.salt;
   // make unique id
@@ -23,36 +24,29 @@ function createUser(user) {
   return db.user.create({
     data: {
       unique_id: uid,
-      fullname: user.fullname,
-      email: user.email.toLowerCase(),
+      fullname: fullname,
+      email: email.toLowerCase(),
       encrypted_password: passwordHash,
       salt: salt,
-    }
+    },
   });
 }
 
 function findUserById(id) {
   return db.user.findUnique({
     where: {
-      id: parseInt(id)
+      id: parseInt(id),
     },
     select: {
-        id: true,
-        fullname: true,
-        email: true,
-        createdAt: true
-    }
+      id: true,
+      fullname: true,
+      email: true,
+      createdAt: true,
+    },
   });
 }
 
-
-const getUserProductsById = (id) => {
-  
-}
-
-
-
-
+const getUserProductsById = (id) => {};
 
 module.exports = {
   findUserByEmail,
@@ -60,6 +54,3 @@ module.exports = {
   findUserById,
   getUserProductsById,
 };
-
-
-

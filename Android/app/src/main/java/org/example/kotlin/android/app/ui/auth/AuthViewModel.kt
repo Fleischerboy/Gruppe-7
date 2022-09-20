@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.example.kotlin.android.app.data.repository.AuthRepository
 import org.example.kotlin.android.app.data.requestsBody.SignIn
@@ -30,6 +31,7 @@ class AuthViewModel(private val repository: AuthRepository) : BaseViewModel(repo
 
 
     fun login(signin : SignIn) = viewModelScope.launch {
+        delay(1000)
        _loginResponse.value = repository.signIn(signin)
     }
 
