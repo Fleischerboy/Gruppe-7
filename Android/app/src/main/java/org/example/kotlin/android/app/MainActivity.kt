@@ -14,6 +14,8 @@ import org.example.kotlin.android.app.ui.startNewActivity
 
 class MainActivity : AppCompatActivity() {
 
+
+
     private lateinit var binding: ActivityMainBinding;
 
     override fun onCreate(savedInstanceState: Bundle?) {

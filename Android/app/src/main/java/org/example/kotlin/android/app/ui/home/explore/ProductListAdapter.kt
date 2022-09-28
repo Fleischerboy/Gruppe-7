@@ -50,8 +50,6 @@ class ProductListAdapter() : ListAdapter<ProductResponse, ProductListAdapter.Pro
 
 }
 
-
-
 class ProductComparator: DiffUtil.ItemCallback<ProductResponse>() {
 
     override fun areItemsTheSame(oldItem: ProductResponse, newItem: ProductResponse) =

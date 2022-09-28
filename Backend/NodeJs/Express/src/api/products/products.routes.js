@@ -12,7 +12,7 @@ router.get("/products", async (req, res, next) => {
     if (products != null) {
       res.json(products);
     }
-  } catch (err) {
+  } catch (err) {+
     next();
   }
 });
