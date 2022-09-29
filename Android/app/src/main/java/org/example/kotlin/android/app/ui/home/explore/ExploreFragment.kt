@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.example.kotlin.android.app.data.repository.ProductRepository
 import org.example.kotlin.android.app.data.responses.ProductResponse
@@ -13,6 +14,7 @@ import org.example.kotlin.android.app.databinding.FragmentExploreBinding
 import org.example.kotlin.android.app.ui.base.BaseFragment
 import org.example.kotlin.android.app.ui.handleApiError
 import org.example.kotlin.android.app.ui.visible
+import androidx.navigation.fragment.findNavController
 
 
 class ExploreFragment : BaseFragment<ExploreViewModel, FragmentExploreBinding, ProductRepository>() {
