@@ -1,11 +1,14 @@
 package org.example.kotlin.android.app.ui.home.explore
 
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.StateSet.TAG
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,20 +19,11 @@ import org.example.kotlin.android.app.databinding.ProductCardViewBinding
 
 class ProductListAdapter() : ListAdapter<ProductResponse, ProductListAdapter.ProductViewHolder>(ProductComparator()){
 
-    class ProductViewHolder(private val binding: ProductCardViewBinding) : RecyclerView.ViewHolder(binding.root) {
-        private val productImgItem: ImageView = binding.productImgItem
-        private val tvProductHeader: TextView = binding.tvProductHeader
-        private val tvProductDescription: TextView = binding.tvProductDescription
 
+    private lateinit var productInterface: ProductInterface
 
-        fun bind(product: ProductResponse) {
-            binding.apply {
-                Glide.with(itemView).load(product.imageUrl).into(productImgItem)
-            }
-            tvProductHeader.text = product.title
-            tvProductDescription.text = product.description
-
-        }
+    fun setOnClickListener(productInterface: ProductInterface) {
+    this.productInterface = productInterface
 
     }
 
@@ -44,15 +38,36 @@ class ProductListAdapter() : ListAdapter<ProductResponse, ProductListAdapter.Pro
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val currentProduct = getItem(position)
+        println(currentProduct)
         holder.bind(currentProduct)
+    }
+
+
+    inner class ProductViewHolder(private val binding: ProductCardViewBinding) : RecyclerView.ViewHolder(binding.root) {
+        private val tvProductHeader: TextView = binding.tvProductHeader
+        private val tvProductDescription: TextView = binding.tvProductDescription
+        private val productViewHolder = binding.productCardView
+
+
+        fun bind(product: ProductResponse) {
+            binding.apply {
+                Glide.with(itemView).load(product.imageUrl).into(productImgItem)
+                tvProductHeader.text = product.title
+                tvProductDescription.text = product.description
+                productViewHolder.setOnClickListener {
+                    productInterface.onItemClickListener(product);
+                }
+            }
+
+
+        }
+
     }
 
 
 }
 
-
-
-class ProductComparator: DiffUtil.ItemCallback<ProductResponse>() {
+class ProductComparator : DiffUtil.ItemCallback<ProductResponse>() {
 
     override fun areItemsTheSame(oldItem: ProductResponse, newItem: ProductResponse) =
         oldItem.title == newItem.title
@@ -63,3 +78,4 @@ class ProductComparator: DiffUtil.ItemCallback<ProductResponse>() {
     ) = oldItem == newItem
 
 }
+

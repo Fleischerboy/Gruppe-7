@@ -1,8 +1,10 @@
 package org.example.kotlin.android.app.ui.home
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
@@ -29,6 +31,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerViewHome) as NavHostFragment
         val navController = navHostFragment.navController
         val appBarConfiguration = AppBarConfiguration(setOf(R.id.exploreFragment, R.id.sellFragment, R.id.inboxFragment, R.id.profileFragment))
@@ -37,5 +40,10 @@ class HomeActivity : AppCompatActivity() {
 
 
     }
+
+
+
+
+
 
 }
