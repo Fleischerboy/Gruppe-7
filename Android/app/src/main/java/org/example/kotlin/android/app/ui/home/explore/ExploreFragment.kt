@@ -20,12 +20,20 @@ import androidx.navigation.fragment.findNavController
 class ExploreFragment : BaseFragment<ExploreViewModel, FragmentExploreBinding, ProductRepository>() {
 
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.exploreProgressBar.visible(true);
         viewModel.getAllProducts()
         val productAdapter = ProductListAdapter()
+
+        productAdapter.setOnClickListener(object  : ProductInterface {
+            override fun onItemClickListener(product: ProductResponse) {
+                println(product.toString())
+            }
+
+        })
 
 
         binding.apply {
@@ -38,6 +46,7 @@ class ExploreFragment : BaseFragment<ExploreViewModel, FragmentExploreBinding, P
                     is Resource.Success -> {
                         binding.exploreProgressBar.visible(false);
                         productAdapter.submitList(it.value.toList())
+
                     }
                     is Resource.Failure -> {
                         handleApiError(it)
@@ -51,11 +60,16 @@ class ExploreFragment : BaseFragment<ExploreViewModel, FragmentExploreBinding, P
 
 
 
+
+
+
     }
 
 
 
-    override fun getViewModel(): Class<ExploreViewModel> = ExploreViewModel::class.java
+    override fun getViewModel(): Class<ExploreViewModel> {
+        return ExploreViewModel::class.java
+    }
 
     override fun getFragmentBinding(
         inflater: LayoutInflater,
