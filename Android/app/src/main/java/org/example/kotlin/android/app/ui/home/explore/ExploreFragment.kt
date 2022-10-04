@@ -15,6 +15,7 @@ import org.example.kotlin.android.app.ui.base.BaseFragment
 import org.example.kotlin.android.app.ui.handleApiError
 import org.example.kotlin.android.app.ui.visible
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 
 
 class ExploreFragment : BaseFragment<ExploreViewModel, FragmentExploreBinding, ProductRepository>() {
@@ -31,6 +32,9 @@ class ExploreFragment : BaseFragment<ExploreViewModel, FragmentExploreBinding, P
         productAdapter.setOnClickListener(object  : ProductInterface {
             override fun onItemClickListener(product: ProductResponse) {
                 println(product.toString())
+                val action = ExploreFragmentDirections.actionExploreFragmentToProductFragment2()
+                findNavController().navigate(action)
+
             }
 
         })

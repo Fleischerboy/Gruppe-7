@@ -18,4 +18,5 @@
     <string name="profil">Profil</string>
     <string name="header">Header</string>
     <string name="description">description</string>
+    <string name="product_value">0</string>
 </resources>
