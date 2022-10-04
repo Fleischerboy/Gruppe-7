@@ -15,9 +15,12 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility
 import com.amazonaws.services.s3.model.ObjectMetadata
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import org.example.kotlin.android.app.BuildConfig
 import org.example.kotlin.android.app.R
 import org.example.kotlin.android.app.data.repository.SellRepository
+import org.example.kotlin.android.app.data.requestsBody.SellProduct
 import org.example.kotlin.android.app.data.restapi.SellApi
 import org.example.kotlin.android.app.data.s3bucket.AwsS3bucket
 import org.example.kotlin.android.app.data.s3bucket.S3constants
@@ -51,6 +54,25 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding,SellReposit
 
         binding.galleryBtn.setOnClickListener() {
             selectImageFormGallery()
+        }
+
+
+        binding.sellbtn.setOnClickListener() {
+            val userId = runBlocking {userPreferences.getUserId.first()}
+            val productTitle = binding.edProductTitle.text.toString()
+            val productDescription = binding.edDescription.text.toString()
+            val sellProductInfo = SellProduct(
+                ownerId = userId.toString(),
+                title = "ps5-controller",
+                imageUrl = "https://images.unsplash.com/photo-1544931170-3ca1337cce88?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1785&q=80",
+                description = "sykt bra",
+                address = "Oslo 1167"
+
+
+            )
+            if (userId != null) {
+                viewModel.sellProduct(userId,sellProductInfo)
+            };
         }
 
 
@@ -152,7 +174,8 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding,SellReposit
     ): FragmentSellBinding = FragmentSellBinding.inflate(inflater, container, false)
 
     override fun getFragmentRepository(): SellRepository {
-        val api = remoteDataSource.buildServiceApi(SellApi::class.java)
+        val token = runBlocking {  userPreferences.getAccessToken.first() }
+        val api = remoteDataSource.buildServiceApi(SellApi::class.java, token)
         return SellRepository(api);
     }
 

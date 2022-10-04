@@ -43,6 +43,7 @@ router.post("/users/:userId/createProduct", auth, async (req, res, next) => {
       res.status(400);
     }
   } catch (err) {
+    console.log("ja error")
     next(err);
   }
 });
