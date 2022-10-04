@@ -1,0 +1,12 @@
+backend with express.js and prisma(orm):
+Auth api with Jwt: https://www.section.io/engineering-education/how-to-build-authentication-api-with-jwt-token-in-nodejs/ og
+https://dev.to/mihaiandrei97/jwt-authentication-using-prisma-and-express-37nk
+Prisma: https://www.youtube.com/watch?v=mU8-nKwfw4Y&t=2571s&ab_channel=LaithAcademy
+MySql database in aws: https://www.youtube.com/watch?v=v3jH1YxJqaY&ab_channel=KahanDataSolutions
+On how to hash and salt the passwords with libary called crypto: https://www.youtube.com/watch?v=Jpsfi2EDo6c&ab_channel=EDMTDev
+
+
+android:
+MVVM: https://simplifiedcoding.in/course/android-mvvm-architecture-tutorial/start/1 
+
+image upload to AWS-s3-bucket: https://mathursanb.medium.com/how-to-upload-images-to-aws-s3-from-the-android-app-a35c603ac9c9
