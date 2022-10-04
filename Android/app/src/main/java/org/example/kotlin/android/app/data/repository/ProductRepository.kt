@@ -12,4 +12,8 @@ class ProductRepository(
         api.getAllProducts();
     }
 
+    suspend fun getProductById(id : String) = safeApiCall {
+        api.getProductById(id);
+    }
+
 }

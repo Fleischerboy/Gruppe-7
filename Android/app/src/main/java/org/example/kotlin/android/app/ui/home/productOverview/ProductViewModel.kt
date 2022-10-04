@@ -12,15 +12,17 @@ import org.example.kotlin.android.app.ui.base.BaseViewModel
 
 class ProductViewModel(private val repository: ProductRepository) : BaseViewModel(repository) {
     //private because we don't wanna expose MutableLiveData to the activity/fragment
-    private val _products: MutableLiveData<Resource<List<ProductResponse>>> = MutableLiveData()
+    private val _product: MutableLiveData<Resource<ProductResponse>> = MutableLiveData()
 
     // this can be observed from fragment/activity
-    val products: LiveData<Resource<List<ProductResponse>>>
-        get() = _products
+    val product: LiveData<Resource<ProductResponse>>
+        get() = _product
 
 
-    fun getAllProducts() = viewModelScope.launch {
-        delay(500)
-        _products.value = repository.getAllProducts()
+
+    fun getUser(productId: String) = viewModelScope.launch {
+        _product.value = Resource.Loading
+        _product.value = repository.getProductById(productId);
     }
+
 }

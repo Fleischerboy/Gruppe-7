@@ -4,6 +4,7 @@ const router = express.Router();
 const {
   createProduct,
   getAllProducts,
+  getProduct,
 } = require("../products/products.service");
 
 router.get("/products", async (req, res, next) => {
@@ -12,8 +13,21 @@ router.get("/products", async (req, res, next) => {
     if (products != null) {
       res.json(products);
     }
-  } catch (err) {+
-    next();
+  } catch (err) {
+    +next();
+  }
+});
+
+router.get("/products/:productId", async (req, res, next) => {
+  try {
+    const productId = parseInt(req.params.productId);
+    console.log(productId);
+    const product = await getProduct(productId);
+    if (product != null) {
+      res.json(product);
+    }
+  } catch (err) {
+    console.log(err);
   }
 });
 

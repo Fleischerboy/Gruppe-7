@@ -14,6 +14,7 @@ import org.example.kotlin.android.app.databinding.FragmentProductBinding
 import org.example.kotlin.android.app.ui.base.BaseFragment
 import org.example.kotlin.android.app.ui.home.explore.ExploreFragment
 import org.example.kotlin.android.app.ui.home.explore.ExploreViewModel
+//TODO: display data
 
 class ProductFragment : BaseFragment<ProductViewModel, FragmentProductBinding, ProductRepository>(){
     private val args : ProductFragmentArgs by navArgs()

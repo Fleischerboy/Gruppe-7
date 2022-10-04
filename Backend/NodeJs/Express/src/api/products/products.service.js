@@ -5,6 +5,14 @@ const getAllProducts = () => {
   return db.product.findMany();
 };
 
+const getProduct = (id) => {
+  return db.product.findUnique({
+    where: {
+      id: id,
+    },
+  });
+};
+
 const createProduct = (user) => {
   const { userId, title, imageUrl, description, address } = user;
   return db.product.create({
@@ -21,4 +29,5 @@ const createProduct = (user) => {
 module.exports = {
   createProduct,
   getAllProducts,
+  getProduct,
 };
