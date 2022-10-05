@@ -3,13 +3,12 @@ package org.example.kotlin.android.app.ui.home.sell
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.FileProvider
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState
@@ -17,7 +16,6 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility
 import com.amazonaws.services.s3.model.ObjectMetadata
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-import org.example.kotlin.android.app.BuildConfig
 import org.example.kotlin.android.app.R
 import org.example.kotlin.android.app.data.repository.SellRepository
 import org.example.kotlin.android.app.data.requestsBody.SellProduct
@@ -32,23 +30,24 @@ import java.io.InputStream
 import java.io.OutputStream
 
 
-class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding,SellRepository>() {
-
+class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding, SellRepository>() {
 
     private val s3Client = AwsS3bucket().getS3Client(
         S3constants.Constants.ACCESS_ID,
         S3constants.Constants.BUCKET_NAME
     )
-    private var isUploaded: Boolean = false
-    private var latestTmpUri: Uri? = null
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        viewModel.selectedImage.observe(viewLifecycleOwner, Observer {uri ->
+            binding.imageView.setImageURI(uri);
+        })
 
         binding.cameraBtn.setOnClickListener() {
-
+            // TODO
 
         }
 
@@ -58,26 +57,32 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding,SellReposit
 
 
         binding.sellbtn.setOnClickListener() {
-            val userId = runBlocking {userPreferences.getUserId.first()}
+            val userId = runBlocking { userPreferences.getUserId.first() }
             val productTitle = binding.edProductTitle.text.toString()
             val productDescription = binding.edDescription.text.toString()
-            val sellProductInfo = SellProduct(
-                ownerId = userId.toString(),
-                title = "ps5-controller",
-                imageUrl = "https://images.unsplash.com/photo-1544931170-3ca1337cce88?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1785&q=80",
-                description = "sykt bra",
-                address = "Oslo 1167"
-
-
-            )
+            val imageKey = "user$userId$productTitle" // TODO LAGE EN UNIQUE ID VIKTIG!
+            println(imageKey)
+            viewModel.selectedImage.observe(viewLifecycleOwner, Observer {uri ->
+               val uploadImg = uploadImageToAwsS3Bucket(uri, imageKey)
+                println(uploadImg)
+            })
             if (userId != null) {
-                viewModel.sellProduct(userId,sellProductInfo)
-            };
+                val imageUrl = s3Client.getResourceUrl("gruppe7s3bucketforandroidapp",
+                    "$imageKey.png"
+                )
+                println("bilde url: $imageUrl")
+                val sellProductInfo = SellProduct(
+                    ownerId = userId.toString(),
+                    title = productTitle,
+                    imageUrl = imageUrl,
+                    description = productDescription,
+                    address = "Oslo 1167"
+                )
+                viewModel.sellProduct(userId, sellProductInfo)
+            }
+
         }
-
-
     }
-
 
 
     private fun selectImageFormGallery() {
@@ -85,64 +90,61 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding,SellReposit
     }
 
 
-
-
     private val selectImageFromGalleryResult =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             println("the result after finishing picking a photo from camera roll!")
             uri?.let {
                 binding.imageView.setImageURI(uri);
-                uploadImageToAwsS3Bucket(uri);
+                viewModel.selectedImageUri(uri)
+
+
             }
 
 
         }
 
 
-
-
-
-
-    private fun uploadImageToAwsS3Bucket(uri: Uri) {
-        val uriSegment = uri.lastPathSegment
+    private fun uploadImageToAwsS3Bucket(uri: Uri?, imageKey: String) {
         // TransferUtility provides a simple API for uploading and downloading content from Amazon S3
         val metadata = ObjectMetadata()
         metadata.setHeader("Content-Type", "image/png")
-        metadata.setHeader("Content-Disposition", "inline; filename=$uriSegment.png")
+        metadata.setHeader("Content-Disposition", "inline; filename=$imageKey.png")
 
-        val trans = TransferUtility.builder().context(activity?.applicationContext).s3Client(s3Client).build()
+        val trans =
+            TransferUtility.builder().context(activity?.applicationContext).s3Client(s3Client)
+                .build()
 
         //  TransferObserver class that will notify when progress or state changes
-        val observer: TransferObserver = trans.upload(S3constants.Constants.BUCKET_NAME,
-            "$uriSegment.png", readFileAndCreateTempFile(uri), metadata)//manual storage permission
+        val observer: TransferObserver = trans.upload(
+            S3constants.Constants.BUCKET_NAME,
+            "$imageKey.png", uri?.let { readFileAndCreateTempFile(it) }, metadata
+        )//manual storage permission
         // To keep track of the upload status, you have to set a listener
         observer.setTransferListener(object : TransferListener {
             // The onStatechanged() callback of the observer is used to notify whether the transfer was successful or failed
             override fun onStateChanged(id: Int, state: TransferState?) {
                 if (state == TransferState.COMPLETED) {
                     state.toString()
-                    val objectUrl = s3Client.getResourceUrl("gruppe7s3bucketforandroidapp", "$uriSegment.png");
-                    d("msg","success")
+                    Log.d("msg", "success")
                 } else if (state == TransferState.FAILED) {
-                    d("msg","fail")
+                    Log.d("msg", "fail")
                 }
             }
 
             // while the onProgressChanged() callback is used to keep track of the number of bytes that have been transferred.
             override fun onProgressChanged(id: Int, bytesCurrent: Long, bytesTotal: Long) {
-                if(bytesCurrent != bytesTotal){
+                if (bytesCurrent != bytesTotal) {
                     binding.imageView.setImageResource(R.drawable.ic_baseline_cloud_upload_24)
                 }
 
             }
 
             override fun onError(id: Int, ex: Exception?) {
-                Log.d("error",ex.toString())
+                Log.d("error", ex.toString())
             }
 
         })
     }
-
 
 
     private fun readFileAndCreateTempFile(uri: Uri): File {
@@ -164,8 +166,6 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding,SellReposit
     }
 
 
-
-
     override fun getViewModel(): Class<SellViewModel> = SellViewModel::class.java
 
     override fun getFragmentBinding(
@@ -174,7 +174,7 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding,SellReposit
     ): FragmentSellBinding = FragmentSellBinding.inflate(inflater, container, false)
 
     override fun getFragmentRepository(): SellRepository {
-        val token = runBlocking {  userPreferences.getAccessToken.first() }
+        val token = runBlocking { userPreferences.getAccessToken.first() }
         val api = remoteDataSource.buildServiceApi(SellApi::class.java, token)
         return SellRepository(api);
     }

@@ -2,12 +2,17 @@ package org.example.kotlin.android.app.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import org.example.kotlin.android.app.data.restapi.Resource
 import org.example.kotlin.android.app.ui.auth.LoginFragment
 import org.example.kotlin.android.app.ui.base.BaseFragment
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
+import java.io.OutputStream
 
 fun<A: Activity> Activity.startNewActivity(activity: Class<A>) {
     Intent(this, activity).also {
@@ -55,6 +60,8 @@ fun Fragment.handleApiError(failure: Resource.Failure,
             requireView().snackbar(error);
         }
     }
+
+
 
 }
 

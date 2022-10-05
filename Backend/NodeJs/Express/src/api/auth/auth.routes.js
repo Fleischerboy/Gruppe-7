@@ -16,8 +16,7 @@ router.post("/signup", async (req, res, next) => {
 
     // Validate user input
     if (!(email && password && fullname)) {
-      res.status(400);
-      throw new Error("You must provide an full name, email and password.");
+      res.status(400).send("You must provide an full name, email and password.");
     }
 
     // Validate if user exist in our database
@@ -38,7 +37,7 @@ router.post("/signup", async (req, res, next) => {
       res.status(400);
     }
   } catch (err) {
-    next(err);
+    console.log(err)
   }
 });
 

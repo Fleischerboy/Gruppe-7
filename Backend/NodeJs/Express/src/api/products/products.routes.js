@@ -12,7 +12,7 @@ router.get("/products", async (req, res, next) => {
     if (products != null) {
       res.json(products);
     }
-  } catch (err) {+
+  } catch (err) {
     next();
   }
 });
@@ -24,9 +24,7 @@ router.post("/users/:userId/createProduct", auth, async (req, res, next) => {
     const { title, imageUrl, description, address } = req.body;
 
     if (!(title && imageUrl && description && address)) {
-      return res
-        .status(400)
-        .send("You must provide an full name, email and password.");
+       res.status(400).send("missing input!");
     }
 
     const product = await createProduct({
@@ -43,8 +41,7 @@ router.post("/users/:userId/createProduct", auth, async (req, res, next) => {
       res.status(400);
     }
   } catch (err) {
-    console.log("ja error")
-    next(err);
+    console.log(err)
   }
 });
 

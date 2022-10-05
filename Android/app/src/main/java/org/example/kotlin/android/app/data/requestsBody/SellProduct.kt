@@ -1,5 +1,8 @@
 package org.example.kotlin.android.app.data.requestsBody
 
+import android.net.Uri
+import androidx.lifecycle.LiveData
+
 data class SellProduct(
     val ownerId: String,
     val title: String,
@@ -10,4 +13,4 @@ data class SellProduct(
 
 
 
-)
+    )
