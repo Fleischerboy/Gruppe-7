@@ -2,59 +2,83 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
+    android:id="@+id/sellLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.sell.SellFragment"
-    android:background="@color/lightGray">
+    android:background="@color/lightGray"
+    tools:context=".ui.home.sell.SellFragment" >
 
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Upload Image to S3"
-        android:textColor="@color/black"
-        android:textSize="26dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/uploadButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="30dp"
+        android:layout_width="225dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/ic_baseline_cloud_upload_24"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/uploadButton"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="168dp"
-        android:layout_marginHorizontal="16dp"
-        android:text="Upload Image"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-    <TextView
-        android:id="@+id/tvSell"
+        android:id="@+id/sellbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sell"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.887" />
+        android:layout_marginTop="24dp"
+        android:text="Sell it!"
+        app:layout_constraintEnd_toEndOf="@+id/edDescription"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="@+id/edDescription"
+        app:layout_constraintTop_toBottomOf="@+id/edDescription" />
+
+    <EditText
+        android:id="@+id/edProductTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/title"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/galleryBtn"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="@+id/cameraBtn"
+        app:layout_constraintTop_toBottomOf="@+id/cameraBtn" />
+
+    <EditText
+        android:id="@+id/edDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/Description"
+        android:inputType="textMultiLine"
+        android:lines="6"
+        android:minHeight="48dp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/edProductTitle"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/edProductTitle"
+        app:layout_constraintTop_toBottomOf="@+id/edProductTitle" />
+
+    <Button
+        android:id="@+id/cameraBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Camera"
+        app:layout_constraintBottom_toBottomOf="@+id/galleryBtn"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/galleryBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Gallery"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

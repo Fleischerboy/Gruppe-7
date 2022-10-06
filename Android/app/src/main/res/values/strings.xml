@@ -18,4 +18,6 @@
     <string name="profil">Profil</string>
     <string name="header">Header</string>
     <string name="description">description</string>
+    <string name="Description">Description</string>
+    <string name="title">Title</string>
 </resources>
