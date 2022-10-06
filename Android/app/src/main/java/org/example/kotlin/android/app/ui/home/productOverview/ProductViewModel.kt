@@ -20,7 +20,7 @@ class ProductViewModel(private val repository: ProductRepository) : BaseViewMode
 
 
 
-    fun getUser(productId: String) = viewModelScope.launch {
+    fun getProduct(productId: Int) = viewModelScope.launch {
         _product.value = Resource.Loading
         _product.value = repository.getProductById(productId);
     }

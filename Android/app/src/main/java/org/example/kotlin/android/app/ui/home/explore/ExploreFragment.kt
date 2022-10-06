@@ -33,6 +33,7 @@ class ExploreFragment : BaseFragment<ExploreViewModel, FragmentExploreBinding, P
             override fun onItemClickListener(product: ProductResponse) {
                 println(product.toString())
                 val action = ExploreFragmentDirections.actionExploreFragmentToProductFragment2()
+                action.uid = product.id
                 findNavController().navigate(action)
 
             }
