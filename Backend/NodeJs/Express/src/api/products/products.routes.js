@@ -29,7 +29,7 @@ router.post(
       if (
         !(title && imageUrl && description && address && productPrice)
       ) {
-        res.status(400).send('missing input!');
+        return res.status(400).send('missing input!');
       }
 
       const product = await createProduct({

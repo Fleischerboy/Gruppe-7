@@ -18,11 +18,13 @@ import kotlinx.coroutines.runBlocking
 import org.example.kotlin.android.app.R
 import org.example.kotlin.android.app.data.repository.SellRepository
 import org.example.kotlin.android.app.data.requestsBody.SellProduct
+import org.example.kotlin.android.app.data.restapi.Resource
 import org.example.kotlin.android.app.data.restapi.SellApi
 import org.example.kotlin.android.app.data.s3bucket.AwsS3bucket
 import org.example.kotlin.android.app.data.s3bucket.S3constants
 import org.example.kotlin.android.app.databinding.FragmentSellBinding
 import org.example.kotlin.android.app.ui.base.BaseFragment
+import org.example.kotlin.android.app.ui.handleApiError
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -43,6 +45,14 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding, SellReposi
 
         viewModel.selectedImage.observe(viewLifecycleOwner, Observer {uri ->
             binding.imageView.setImageURI(uri);
+        })
+
+        viewModel.productResponse.observe(viewLifecycleOwner, Observer {
+            when(it) {
+                is Resource.Failure -> {
+                    handleApiError(it);
+                }
+            }
         })
 
         binding.cameraBtn.setOnClickListener() {
