@@ -45,6 +45,8 @@ fun View.snackbar(message: String, action: (() -> Unit)? = null) {
 }
 
 
+
+//TODO should improve this code and make it more flexible.
 fun Fragment.handleApiError(failure: Resource.Failure,
                             retry: (() -> Unit)? = null) {
     when {

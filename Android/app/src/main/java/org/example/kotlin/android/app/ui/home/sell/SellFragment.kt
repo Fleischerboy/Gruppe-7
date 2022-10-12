@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener
@@ -49,6 +50,10 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding, SellReposi
 
         viewModel.productResponse.observe(viewLifecycleOwner, Observer {
             when(it) {
+                is Resource.Success -> {
+                    Toast.makeText(activity, "success product is made!", Toast.LENGTH_SHORT).show() // just for now
+                }
+
                 is Resource.Failure -> {
                     handleApiError(it);
                 }
