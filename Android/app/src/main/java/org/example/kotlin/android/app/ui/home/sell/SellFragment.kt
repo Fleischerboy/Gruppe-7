@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver
@@ -60,6 +59,7 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding, SellReposi
             val userId = runBlocking { userPreferences.getUserId.first() }
             val productTitle = binding.edProductTitle.text.toString()
             val productDescription = binding.edDescription.text.toString()
+            val productPrice = binding.edProductPrice.text.toString();
             val imageKey = "user$userId$productTitle" // TODO LAGE EN UNIQUE ID VIKTIG!
             println(imageKey)
             viewModel.selectedImage.observe(viewLifecycleOwner, Observer {uri ->
@@ -75,6 +75,7 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding, SellReposi
                     ownerId = userId.toString(),
                     title = productTitle,
                     imageUrl = imageUrl,
+                    productPrice = productPrice,
                     description = productDescription,
                     address = "Oslo 1167"
                 )

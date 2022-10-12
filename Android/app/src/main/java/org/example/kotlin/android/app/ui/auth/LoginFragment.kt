@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import kotlinx.coroutines.launch
 import org.example.kotlin.android.app.databinding.FragmentLoginBinding
 import org.example.kotlin.android.app.data.repository.AuthRepository
@@ -54,6 +55,13 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
         }
 
          */
+
+
+        binding.tvSignUp.setOnClickListener() {
+            val navController = it.findNavController();
+            val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+            navController.navigate(action);
+        }
 
         binding.loginBtn.setOnClickListener() {
             login();
