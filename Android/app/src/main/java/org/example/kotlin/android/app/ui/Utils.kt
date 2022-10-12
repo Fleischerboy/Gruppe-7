@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar
 import org.example.kotlin.android.app.data.restapi.Resource
 import org.example.kotlin.android.app.ui.auth.LoginFragment
 import org.example.kotlin.android.app.ui.base.BaseFragment
+import org.example.kotlin.android.app.ui.home.sell.SellFragment
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -44,6 +45,8 @@ fun View.snackbar(message: String, action: (() -> Unit)? = null) {
 }
 
 
+
+//TODO should improve this code and make it more flexible.
 fun Fragment.handleApiError(failure: Resource.Failure,
                             retry: (() -> Unit)? = null) {
     when {
@@ -51,10 +54,18 @@ fun Fragment.handleApiError(failure: Resource.Failure,
          failure.errorCode == 401 -> {
              if(this is LoginFragment) {
                  requireView().snackbar("You've entered incorrect email or password")
-             }else { (this as BaseFragment<*, *, *>).logout()
+             }
+
+
+             else { (this as BaseFragment<*, *, *>).logout()
 
              }
          }
+        failure.errorCode == 400 -> {
+            if(this is LoginFragment || this is SellFragment) {
+                requireView().snackbar("Missing required input")
+            }
+        }
         else -> {
             val error = failure.errorBody.toString()
             requireView().snackbar(error);

@@ -24,10 +24,10 @@
         android:id="@+id/sellbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="Sell it!"
         app:layout_constraintEnd_toEndOf="@+id/edDescription"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/edDescription"
         app:layout_constraintTop_toBottomOf="@+id/edDescription" />
 
@@ -35,31 +35,43 @@
         android:id="@+id/edProductTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/title"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="@+id/galleryBtn"
-        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="@+id/cameraBtn"
         app:layout_constraintTop_toBottomOf="@+id/cameraBtn" />
+
+    <EditText
+        android:id="@+id/edProductPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Price"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/edProductTitle"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/edProductTitle"
+        app:layout_constraintTop_toBottomOf="@+id/edProductTitle" />
 
     <EditText
         android:id="@+id/edDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/Description"
         android:inputType="textMultiLine"
-        android:lines="6"
-        android:minHeight="48dp"
+        android:lines="4"
+        android:minHeight="38dp"
         android:scrollbars="vertical"
-        app:layout_constraintEnd_toEndOf="@+id/edProductTitle"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/edProductTitle"
-        app:layout_constraintTop_toBottomOf="@+id/edProductTitle" />
+        app:layout_constraintEnd_toEndOf="@+id/edProductPrice"
+        app:layout_constraintStart_toStartOf="@+id/edProductPrice"
+        app:layout_constraintTop_toBottomOf="@+id/edProductPrice" />
 
     <Button
         android:id="@+id/cameraBtn"

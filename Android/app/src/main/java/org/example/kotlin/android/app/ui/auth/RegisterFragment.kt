@@ -33,17 +33,15 @@ class RegisterFragment : Fragment() {
 
 
 
-        //
+
         val signIn = view.findViewById<TextView>(R.id.tvSignIn);
 
-        //
+
         signIn.setOnClickListener {
-            /*
             val navController = it.findNavController();
             val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment();
             navController.navigate(action);
 
-             */
         }
     }
 }

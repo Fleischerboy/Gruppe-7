@@ -6,8 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver
@@ -19,11 +19,13 @@ import kotlinx.coroutines.runBlocking
 import org.example.kotlin.android.app.R
 import org.example.kotlin.android.app.data.repository.SellRepository
 import org.example.kotlin.android.app.data.requestsBody.SellProduct
+import org.example.kotlin.android.app.data.restapi.Resource
 import org.example.kotlin.android.app.data.restapi.SellApi
 import org.example.kotlin.android.app.data.s3bucket.AwsS3bucket
 import org.example.kotlin.android.app.data.s3bucket.S3constants
 import org.example.kotlin.android.app.databinding.FragmentSellBinding
 import org.example.kotlin.android.app.ui.base.BaseFragment
+import org.example.kotlin.android.app.ui.handleApiError
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -46,6 +48,18 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding, SellReposi
             binding.imageView.setImageURI(uri);
         })
 
+        viewModel.productResponse.observe(viewLifecycleOwner, Observer {
+            when(it) {
+                is Resource.Success -> {
+                    Toast.makeText(activity, "success product is made!", Toast.LENGTH_SHORT).show() // just for now
+                }
+
+                is Resource.Failure -> {
+                    handleApiError(it);
+                }
+            }
+        })
+
         binding.cameraBtn.setOnClickListener() {
             // TODO
 
@@ -60,6 +74,7 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding, SellReposi
             val userId = runBlocking { userPreferences.getUserId.first() }
             val productTitle = binding.edProductTitle.text.toString()
             val productDescription = binding.edDescription.text.toString()
+            val productPrice = binding.edProductPrice.text.toString();
             val imageKey = "user$userId$productTitle" // TODO LAGE EN UNIQUE ID VIKTIG!
             println(imageKey)
             viewModel.selectedImage.observe(viewLifecycleOwner, Observer {uri ->
@@ -75,6 +90,7 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding, SellReposi
                     ownerId = userId.toString(),
                     title = productTitle,
                     imageUrl = imageUrl,
+                    productPrice = productPrice,
                     description = productDescription,
                     address = "Oslo 1167"
                 )

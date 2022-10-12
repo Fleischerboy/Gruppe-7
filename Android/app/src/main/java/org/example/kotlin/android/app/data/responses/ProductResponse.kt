@@ -5,6 +5,7 @@ data class ProductResponse(
     val description: String,
     val id: Int,
     val imageUrl: String,
+    val productPrice: Double,
     val ownerId: Int,
     val title: String
 )

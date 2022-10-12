@@ -22,7 +22,7 @@ import org.example.kotlin.android.app.ui.startNewActivity
 - This is just basic base fragment that is just creating the binding for our fragment
   We will extend this fragment whenever we will create our actual fragment
 
-- for every fragment we have in out application we have some commons for each.
+- for every fragment we have in our application we have some commons for each.
 for example we will have create viewModel, data-binding and repository
 
  */

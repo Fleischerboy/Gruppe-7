@@ -7,10 +7,7 @@ data class SellProduct(
     val ownerId: String,
     val title: String,
     val imageUrl: String,
+    val productPrice: String,
     val description: String,
     val address: String,
-
-
-
-
     )

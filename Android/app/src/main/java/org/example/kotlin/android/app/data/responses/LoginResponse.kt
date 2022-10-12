@@ -4,6 +4,7 @@ data class LoginResponse(
     val createdAt: String,
     val email: String,
     val fullname: String,
+    val profileImageUrl: String?,
     val id: Int,
     val updatedAt: String,
     val token: String?,
