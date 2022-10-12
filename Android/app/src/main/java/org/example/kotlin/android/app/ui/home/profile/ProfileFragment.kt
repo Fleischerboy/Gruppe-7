@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
+import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.example.kotlin.android.app.data.UserPreferences
@@ -58,7 +60,8 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding, U
 
     private fun updateUI(user: UserResponse) {
        with(binding) {
-           tvWelcomeUserText.text = user.fullname
+           Picasso.get().load(user.profileImageUrl).into(profileImage);
+           tvUserFullName.text = user.fullname
            tvEmail.text = user.email
            tvCreatedAt.text = user.createdAt
        }

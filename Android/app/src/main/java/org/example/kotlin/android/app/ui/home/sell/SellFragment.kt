@@ -51,7 +51,7 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding, SellReposi
         viewModel.productResponse.observe(viewLifecycleOwner, Observer {
             when(it) {
                 is Resource.Success -> {
-                    Toast.makeText(activity, "success product is made!", Toast.LENGTH_SHORT).show() // just for now
+
                 }
 
                 is Resource.Failure -> {
