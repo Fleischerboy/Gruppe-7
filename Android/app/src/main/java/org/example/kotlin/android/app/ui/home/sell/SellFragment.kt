@@ -70,6 +70,7 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding, SellReposi
         }
 
 
+
         binding.sellbtn.setOnClickListener() {
             val userId = runBlocking { userPreferences.getUserId.first() }
             val productTitle = binding.edProductTitle.text.toString()
