@@ -12,4 +12,7 @@ interface ProductApi {
 
     @GET("products/{productId}")
     suspend fun getProductById(@Path("productId") productId: Int): ProductResponse
+
+    @GET("bids")
+    suspend fun getAllBids(@Path("productId") productId: Int): ProductResponse)
 }
