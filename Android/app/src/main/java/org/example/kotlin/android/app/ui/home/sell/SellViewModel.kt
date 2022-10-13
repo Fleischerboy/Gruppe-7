@@ -27,6 +27,7 @@ class SellViewModel(private val repository: SellRepository) : BaseViewModel(repo
     fun sellProduct(userId : String,sellProduct: SellProduct) = viewModelScope.launch {
         _productResponse.value = repository.sellProduct(userId,sellProduct);
 
+
     }
 
     fun selectedImageUri(uri: Uri) {

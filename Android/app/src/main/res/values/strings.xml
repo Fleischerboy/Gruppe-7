@@ -20,4 +20,8 @@
     <string name="description">description</string>
     <string name="Description">Description</string>
     <string name="title">Title</string>
+    <string name="createdat">createdAt</string>
+    <string name="logout">Logout</string>
+    <string name="product_title">Product Title</string>
+    <string name="product_image">product-image</string>
 </resources>

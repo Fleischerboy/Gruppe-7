@@ -41,7 +41,8 @@ router.post('/signup', async (req, res, next) => {
   } catch (err) {
     console.log(err);
   }
-});
+}); 
+
 
 router.post('/signin', async (req, res, next) => {
   // Extracting password and email from request

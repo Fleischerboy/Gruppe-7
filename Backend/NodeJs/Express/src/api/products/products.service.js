@@ -5,6 +5,14 @@ const getAllProducts = () => {
   return db.product.findMany();
 };
 
+const getUserProductsById = (id) => {
+  return db.product.findMany({
+    where: {
+      ownerId: parseInt(id),
+    },
+  });
+};
+
 const createProduct = (user) => {
   const {
     userId,
@@ -30,4 +38,5 @@ const createProduct = (user) => {
 module.exports = {
   createProduct,
   getAllProducts,
+  getUserProductsById,
 };
