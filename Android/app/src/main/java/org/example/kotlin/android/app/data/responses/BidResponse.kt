@@ -1,5 +1,9 @@
 package org.example.kotlin.android.app.data.responses
 
-class BidResponse {
-    
-}
+data class BidResponse (
+    val id: Int,
+    val price: Float,
+    val productId: Int,
+    val ownerId: Int
+)
+

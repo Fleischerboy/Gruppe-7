@@ -17,9 +17,10 @@
     <string name="innboks">Innboks</string>
     <string name="profil">Profil</string>
     <string name="header">Header</string>
-    <string name="description">description</string>
     <string name="product_value">0</string>
     <string name="bid">Bid</string>
     <string name="image_of_the_product">Image of the product</string>
     <string name="price">price</string>
+    <string name="description">Description</string>
+    <string name="productTitle">Product Title</string>
 </resources>

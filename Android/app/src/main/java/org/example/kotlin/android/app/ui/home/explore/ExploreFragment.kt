@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.example.kotlin.android.app.data.repository.ProductRepository
 import org.example.kotlin.android.app.data.responses.ProductResponse
@@ -13,9 +12,8 @@ import org.example.kotlin.android.app.data.restapi.Resource
 import org.example.kotlin.android.app.databinding.FragmentExploreBinding
 import org.example.kotlin.android.app.ui.base.BaseFragment
 import org.example.kotlin.android.app.ui.handleApiError
+import org.example.kotlin.android.app.ui.home.HomeActivity
 import org.example.kotlin.android.app.ui.visible
-import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 
 
 class ExploreFragment : BaseFragment<ExploreViewModel, FragmentExploreBinding, ProductRepository>() {
@@ -31,10 +29,10 @@ class ExploreFragment : BaseFragment<ExploreViewModel, FragmentExploreBinding, P
 
         productAdapter.setOnClickListener(object  : ProductInterface {
             override fun onItemClickListener(product: ProductResponse) {
-                println(product.toString())
-                val action = ExploreFragmentDirections.actionExploreFragmentToProductFragment2()
-                action.uid = product.id
-                findNavController().navigate(action)
+                (activity as HomeActivity?)?.sendProductIntent(product.id)
+//                val action = ExploreFragmentDirections.actionExploreFragmentToProductFragment2()
+//                action.uid = product.id
+//                findNavController().navigate(action)
 
             }
 

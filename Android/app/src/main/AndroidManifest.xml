@@ -32,6 +32,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.home.productOverview.ProductActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PRODUCT" />
+
+                <category android:name="android.intent.category.DETAILS" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
