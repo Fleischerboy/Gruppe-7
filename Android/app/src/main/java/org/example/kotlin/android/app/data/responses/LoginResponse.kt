@@ -7,4 +7,9 @@ data class LoginResponse(
     val id: Int,
     val updatedAt: String,
     val token: String?,
+
+
+
+    
+    
 )
