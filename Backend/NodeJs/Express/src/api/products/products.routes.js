@@ -4,7 +4,9 @@ const router = express.Router();
 const {
   createProduct,
   getAllProducts,
+  getUserProductsById,
 } = require('../products/products.service');
+const { findUserById } = require('../users/users.services');
 
 router.get('/products', async (req, res, next) => {
   try {
@@ -14,6 +16,22 @@ router.get('/products', async (req, res, next) => {
     }
   } catch (err) {
     next();
+  }
+});
+
+router.get('/users/:userId/products', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const findUser = await findUserById(userId);
+    if (!findUser) return res.status(404).send('user does not exist');
+    const userProducts = await getUserProductsById(userId);
+
+    if (userProducts) {
+      return res.status(200).json(userProducts);
+    }
+    res.status(404).send('products not found');
+  } catch (err) {
+    console.log(err);
   }
 });
 

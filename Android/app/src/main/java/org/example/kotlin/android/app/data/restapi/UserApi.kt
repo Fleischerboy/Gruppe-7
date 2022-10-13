@@ -1,6 +1,7 @@
 package org.example.kotlin.android.app.data.restapi
 
 import okhttp3.ResponseBody
+import org.example.kotlin.android.app.data.responses.ProductResponse
 import org.example.kotlin.android.app.data.responses.UserResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -13,7 +14,14 @@ interface UserApi {
     suspend fun getUser(@Path("userId") userId: String): UserResponse
 
 
+    @GET("users/{userId}/products")
+    suspend fun getUserProductsById(@Path("userId") userId: String): List<ProductResponse>
+
+
     @POST("logout")
     suspend fun logout(): ResponseBody
+
+
+
 
 }
