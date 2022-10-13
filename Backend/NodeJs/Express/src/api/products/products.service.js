@@ -5,17 +5,18 @@ const getAllProducts = () => {
   return db.product.findMany();
 };
 
-<<<<<<< HEAD
 const getUserProductsById = (id) => {
   return db.product.findMany({
     where: {
       ownerId: parseInt(id),
-=======
+    },
+  });
+};
+
 const getProduct = (id) => {
   return db.product.findUnique({
     where: {
       id: id,
->>>>>>> origin/ProductOverview
     },
   });
 };
@@ -45,9 +46,6 @@ const createProduct = (user) => {
 module.exports = {
   createProduct,
   getAllProducts,
-<<<<<<< HEAD
   getUserProductsById,
-=======
   getProduct,
->>>>>>> origin/ProductOverview
 };

@@ -1,14 +1,14 @@
-const express = require("express");
-const auth = require("../middleware/auth");
+const express = require('express');
+const auth = require('../middleware/auth');
 const router = express.Router();
 const {
   createProduct,
   getAllProducts,
   getUserProductsById,
-} = require('../products/products.service');
-const { findUserById } = require('../users/users.services');
   getProduct,
 } = require('../products/products.service');
+
+const { findUserById } = require('../users/users.services');
 
 router.get('/products', async (req, res, next) => {
   try {
@@ -32,6 +32,20 @@ router.get('/users/:userId/products', async (req, res) => {
       return res.status(200).json(userProducts);
     }
     res.status(404).send('products not found');
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.get('/products/:productId', async (req, res, next) => {
+  try {
+    const productId = parseInt(req.params.productId);
+    console.log(productId);
+    console.log('yes');
+    const product = await getProduct(productId);
+    if (product != null) {
+      res.json(product);
+    }
   } catch (err) {
     console.log(err);
   }
@@ -70,6 +84,6 @@ router.post(
       console.log(err);
     }
   }
-});
+);
 
 module.exports = router;

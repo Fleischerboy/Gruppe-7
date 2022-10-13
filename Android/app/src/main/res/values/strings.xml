@@ -24,4 +24,10 @@
     <string name="logout">Logout</string>
     <string name="product_title">Product Title</string>
     <string name="product_image">product-image</string>
+    <string name="product_value">0</string>
+    <string name="bid">Bid</string>
+    <string name="image_of_the_product">Image of the product</string>
+    <string name="price">price</string>
+    <string name="productTitle">Product Title</string>
+    <string name="productid">productId</string>
 </resources>

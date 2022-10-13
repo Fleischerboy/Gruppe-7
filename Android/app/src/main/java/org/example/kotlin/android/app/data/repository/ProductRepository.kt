@@ -16,8 +16,11 @@ class ProductRepository(
         api.getProductById(id);
     }
 
+    /*
     suspend fun getAllBids() = safeApiCall {
         api.getAllBids()
     }
+
+     */
 
 }
