@@ -1,5 +1,5 @@
-const express = require('express');
-const auth = require('../middleware/auth');
+const express = require("express");
+const auth = require("../middleware/auth");
 const router = express.Router();
 const {
   createProduct,
@@ -7,6 +7,8 @@ const {
   getUserProductsById,
 } = require('../products/products.service');
 const { findUserById } = require('../users/users.services');
+  getProduct,
+} = require('../products/products.service');
 
 router.get('/products', async (req, res, next) => {
   try {
@@ -68,6 +70,6 @@ router.post(
       console.log(err);
     }
   }
-);
+});
 
 module.exports = router;

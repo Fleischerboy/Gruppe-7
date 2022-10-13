@@ -1,22 +1,17 @@
 package org.example.kotlin.android.app.ui.home
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.lifecycleScope
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import kotlinx.coroutines.launch
 import org.example.kotlin.android.app.R
-import org.example.kotlin.android.app.data.UserPreferences
 import org.example.kotlin.android.app.databinding.ActivityHomeBinding
+import org.example.kotlin.android.app.ui.auth.AuthActivity
+import org.example.kotlin.android.app.ui.home.productOverview.ProductActivity
 import org.example.kotlin.android.app.ui.home.profile.ProfileViewModel
 
 class HomeActivity : AppCompatActivity() {
@@ -38,8 +33,8 @@ class HomeActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration);
         binding.bottomNavigationView.setupWithNavController(navController);
 
-
     }
+
 
 
 

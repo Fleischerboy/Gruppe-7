@@ -12,6 +12,12 @@ class ProductRepository(
         api.getAllProducts();
     }
 
+    suspend fun getProductById(id : Int) = safeApiCall {
+        api.getProductById(id);
+    }
 
+    suspend fun getAllBids() = safeApiCall {
+        api.getAllBids()
+    }
 
 }

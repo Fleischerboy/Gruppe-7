@@ -33,6 +33,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+    namespace 'org.example.kotlin.android.app'
 }
 
 dependencies {
@@ -89,6 +90,10 @@ dependencies {
     // A powerful image downloading and caching library for Android
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+
+
+    // A powerful image downloading and caching library for Android
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 
 }

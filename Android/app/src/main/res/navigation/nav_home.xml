@@ -9,7 +9,11 @@
         android:id="@+id/exploreFragment"
         android:name="org.example.kotlin.android.app.ui.home.explore.ExploreFragment"
         android:label="Explore"
-        tools:layout="@layout/fragment_explore" />
+        tools:layout="@layout/fragment_explore" >
+        <action
+            android:id="@+id/action_exploreFragment_to_productFragment2"
+            app:destination="@id/productFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/inboxFragment"
         android:name="org.example.kotlin.android.app.ui.home.inbox.InboxFragment"
@@ -25,4 +29,14 @@
         android:name="org.example.kotlin.android.app.ui.home.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/productFragment2"
+        android:name="org.example.kotlin.android.app.ui.home.productOverview.ProductFragment"
+        android:label="ProductFragment" >
+        <argument
+            android:name="uid"
+            app:argType="integer"
+            android:defaultValue="1" />
+    </fragment>
+
 </navigation>

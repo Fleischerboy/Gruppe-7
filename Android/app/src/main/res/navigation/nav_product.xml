@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_product"
+    app:startDestination="@id/productOverviewFragment">
+    <fragment
+        android:id="@+id/productOverviewFragment"
+        android:name="org.example.kotlin.android.app.ui.home.productOverview.ProductOverviewFragment"
+        android:label="fragment_product_overview"
+        tools:layout="@layout/fragment_product_overview" />
+</navigation>

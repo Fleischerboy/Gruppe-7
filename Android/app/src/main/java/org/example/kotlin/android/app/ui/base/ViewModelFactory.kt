@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import org.example.kotlin.android.app.data.repository.*
 import org.example.kotlin.android.app.ui.auth.AuthViewModel
 import org.example.kotlin.android.app.ui.home.explore.ExploreViewModel
+import org.example.kotlin.android.app.ui.home.productOverview.ProductViewModel
 import org.example.kotlin.android.app.ui.home.profile.ProfileViewModel
 import org.example.kotlin.android.app.ui.home.sell.SellViewModel
 import java.lang.IllegalArgumentException
@@ -23,6 +24,7 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> ProfileViewModel(repository as UserRepository) as T
             modelClass.isAssignableFrom(ExploreViewModel::class.java) -> ExploreViewModel(repository as ProductRepository) as T
             modelClass.isAssignableFrom(SellViewModel::class.java) -> SellViewModel(repository as SellRepository) as T
+           modelClass.isAssignableFrom(ProductViewModel::class.java) -> ProductViewModel(repository as ProductRepository) as T
             else -> throw  IllegalArgumentException("ViewModelClass Not Found");
         }
     }
