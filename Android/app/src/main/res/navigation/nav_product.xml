@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_product"
-    app:startDestination="@id/productDetailFragment">
+    app:startDestination="@id/productOverviewFragment">
     <fragment
-        android:id="@+id/productDetailFragment"
-        android:name="org.example.kotlin.android.app.ProductDetailFragment"
-        android:label="fragment_product_detail"
-        tools:layout="@layout/fragment_product_detail" />
+        android:id="@+id/productOverviewFragment"
+        android:name="org.example.kotlin.android.app.ui.home.productOverview.ProductOverviewFragment"
+        android:label="fragment_product_overview"
+        tools:layout="@layout/fragment_product_overview" />
 </navigation>

@@ -86,4 +86,8 @@ dependencies {
     implementation("com.amazonaws:aws-android-sdk-s3:2.17.1")
 
 
+    // A powerful image downloading and caching library for Android
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+
 }

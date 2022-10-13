@@ -1,5 +1,6 @@
 package org.example.kotlin.android.app.ui.home.explore
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ import org.example.kotlin.android.app.databinding.FragmentExploreBinding
 import org.example.kotlin.android.app.ui.base.BaseFragment
 import org.example.kotlin.android.app.ui.handleApiError
 import org.example.kotlin.android.app.ui.home.HomeActivity
+import org.example.kotlin.android.app.ui.home.productOverview.ProductActivity
+import org.example.kotlin.android.app.ui.startNewActivity
 import org.example.kotlin.android.app.ui.visible
 
 
@@ -29,10 +32,12 @@ class ExploreFragment : BaseFragment<ExploreViewModel, FragmentExploreBinding, P
 
         productAdapter.setOnClickListener(object  : ProductInterface {
             override fun onItemClickListener(product: ProductResponse) {
-                (activity as HomeActivity?)?.sendProductIntent(product.id)
-//                val action = ExploreFragmentDirections.actionExploreFragmentToProductFragment2()
-//                action.uid = product.id
-//                findNavController().navigate(action)
+                println(product.id)
+                val productActivityIntent = Intent(context, ProductActivity::class.java)
+                val productId = product.id;
+                productActivityIntent.putExtra("product_id", productId)
+                startActivity(productActivityIntent)
+
 
             }
 

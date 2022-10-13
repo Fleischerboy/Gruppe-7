@@ -33,15 +33,8 @@ class HomeActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration);
         binding.bottomNavigationView.setupWithNavController(navController);
 
-
-
     }
 
-    fun sendProductIntent(productId : Int){
-        val intent = Intent(baseContext, ProductActivity::class.java)
-        intent.putExtra("EXTRA_PRODUCT_ID", productId)
-        startActivity(intent)
-    }
 
 
 

@@ -21,7 +21,6 @@ class ProductViewModel(private val repository: ProductRepository) : BaseViewMode
 
 
     fun getProduct(productId: Int) = viewModelScope.launch {
-        _product.value = Resource.Loading
         _product.value = repository.getProductById(productId);
     }
 
