@@ -18,8 +18,7 @@ model User {
   unique_id String @db.VarChar(23)
   fullname String  @db.VarChar(250)
   email String  @unique @db.VarChar(100)
-  userProfileImageUrl String?  @db.VarChar(2080)
-  encrypted_password String @db.VarChar(128)
+  encrypted_password String @db.VarChar(128)  
   salt String @db.VarChar(16)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt

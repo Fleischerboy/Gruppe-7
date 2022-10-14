@@ -40,7 +40,6 @@ function findUserById(id) {
     select: {
       id: true,
       fullname: true,
-      profileImageUrl: true,
       email: true,
       createdAt: true,
     },
