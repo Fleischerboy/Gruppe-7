@@ -43,6 +43,7 @@ function findUserById(id) {
       email: true,
       createdAt: true,
     },
+    
   });
 }
 
