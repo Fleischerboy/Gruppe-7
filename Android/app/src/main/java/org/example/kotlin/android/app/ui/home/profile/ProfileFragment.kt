@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import org.example.kotlin.android.app.R
 import org.example.kotlin.android.app.data.UserPreferences
 import org.example.kotlin.android.app.data.repository.UserRepository
 import org.example.kotlin.android.app.data.responses.LoginResponse
@@ -97,7 +98,8 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding, U
 
     private fun updateUI(user: UserResponse) {
        with(binding) {
-           Picasso.get().load(user.profileImageUrl).into(profileImage);
+//           Picasso.get().load(user.profileImageUrl).into(profileImage);
+           profileImage.setImageResource(R.drawable.profile_image)
            tvUserFullName.text = user.fullname
            tvEmail.text = user.email
            tvCreatedAt.text = user.createdAt
