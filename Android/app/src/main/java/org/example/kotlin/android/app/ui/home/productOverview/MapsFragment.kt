@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -15,7 +16,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import org.example.kotlin.android.app.R
 
 class MapsFragment : Fragment() {
-
+    private val args : MapsFragmentArgs by navArgs()
 
 
     private val callback = OnMapReadyCallback { googleMap ->
@@ -28,9 +29,9 @@ class MapsFragment : Fragment() {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val location = LatLng(args.latitude.toDouble(), args.longitude.toDouble())
+        googleMap.addMarker(MarkerOptions().position(location).title("Marker in Sydney"))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
     }
 
     override fun onCreateView(

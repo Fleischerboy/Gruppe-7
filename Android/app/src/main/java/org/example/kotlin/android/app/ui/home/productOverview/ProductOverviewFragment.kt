@@ -52,9 +52,8 @@ class ProductOverviewFragment : BaseFragment<ProductViewModel, FragmentProductOv
 //            mapsButton.text = product.location;
             mapsButton.setOnClickListener {
                 val action = ProductOverviewFragmentDirections.actionProductOverviewFragmentToMapsFragment()
-//                action.lat = -34.0
-//                action.long = 151.0
-                // Calls the navigate action, taking us to the MovieDatilFragment
+                action.latitude = 59.132164F
+                action.longitude = 11.352F
                 findNavController().navigate(action)
             }
 
