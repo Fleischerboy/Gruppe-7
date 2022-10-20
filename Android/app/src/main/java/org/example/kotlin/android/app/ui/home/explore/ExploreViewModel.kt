@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import org.example.kotlin.android.app.data.repository.ProductRepository
 import org.example.kotlin.android.app.data.responses.ProductResponse
@@ -20,7 +23,10 @@ class ExploreViewModel(private val repository: ProductRepository) : BaseViewMode
 
 
         fun getAllProducts() = viewModelScope.launch {
-                delay(500)
-                _products.value = repository.getAllProducts()
+                repository.getAllProducts().collect {
+                        _products.value = it;
+                }
         }
+
+
 }

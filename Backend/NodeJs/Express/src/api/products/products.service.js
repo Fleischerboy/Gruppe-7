@@ -21,15 +21,15 @@ const getProduct = (id) => {
   });
 };
 
-const createProduct = (user) => {
-  const {
-    userId,
-    title,
-    imageUrl,
-    description,
-    productPrice,
-    address,
-  } = user;
+  const createProduct = (user) => {
+    const {
+      userId,
+      title,
+      imageUrl,
+      description,
+      productPrice,
+      address,
+    } = user;
   return db.product.create({
     data: {
       ownerId: parseInt(userId),
