@@ -30,4 +30,5 @@
     <string name="price">price</string>
     <string name="productTitle">Product Title</string>
     <string name="productid">productId</string>
+    <string name="get_location">Get Location</string>
 </resources>
