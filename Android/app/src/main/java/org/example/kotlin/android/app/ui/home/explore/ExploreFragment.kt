@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.delay
 import org.example.kotlin.android.app.data.repository.ProductRepository
 import org.example.kotlin.android.app.data.responses.ProductResponse
 import org.example.kotlin.android.app.data.restapi.ProductApi
@@ -55,6 +56,9 @@ class ExploreFragment : BaseFragment<ExploreViewModel, FragmentExploreBinding, P
                         binding.exploreProgressBar.visible(false);
                         productAdapter.submitList(it.value.toList())
 
+                    }
+                    is Resource.Loading -> {
+                        binding.exploreProgressBar.visible(true);
                     }
                     is Resource.Failure -> {
                         handleApiError(it)
