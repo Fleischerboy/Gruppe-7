@@ -5,31 +5,36 @@ const {
   createBid,
   getAllBids,
   getBid,
+  acceptBid,
 } = require('../bids/bids.service');
+const { createChat } = require('../chat/chat.service');
 
 const { getProductById } = require('../products/products.service');
 
 router.get('/api/bids', async (req, res) => {
   try {
     const bids = await getAllBids();
-    if (bids != null) {
-      res.json(bids);
+    if (bids) {
+      return res.json(bids);
     }
+    return res.status(404).send('did not find this resource');
   } catch (err) {
     console.log(err);
+    return res.status(500).send('Failed finding bids');
   }
 });
 
 router.get('/api/bids/:bidId', async (req, res) => {
   try {
     const bidId = parseInt(req.params.bidId);
-    console.log(bidId);
     const bid = await getBid(bidId);
-    if (bid != null) {
-      res.json(bid);
+    if (bid) {
+      return res.json(bid);
     }
+    return res.status(404).send('did not find this resource');
   } catch (err) {
     console.log(err);
+    return res.status(500).send('failed finding bid');
   }
 });
 
@@ -62,16 +67,44 @@ router.post(
         bidUserId,
         bidAmount,
       });
-      if (bid) {
-        res.status(201).json(bid);
-      } else {
-        res.status(500).send('Failed creating bid');
+      if (!bid) {
+        return res.status(500).send('Failed creating bid');
       }
+      return res.status(201).json(bid);
     } catch (err) {
       console.log(err);
       return res.status(500).send('Failed creating bid');
     }
   }
 );
+
+router.put('/api/bids/:bidId/acceptBid', async (req, res) => {
+  try {
+    const bidId = parseInt(req.params.bidId);
+    const bid = await getBid(bidId);
+
+    if (!bid) return res.status(404).send('bid not found');
+
+    const accept = await acceptBid(bidId);
+
+    if (!accept)
+      return res.status(500).send('Failed to accept the bid');
+
+    const { productOwnerId, bidUserId, productId } = accept;
+    const createdChat = await createChat({
+      productOwnerId,
+      bidUserId,
+      productId,
+    });
+
+    if (!createdChat) {
+      return res.status(500).send('Failed creating chat');
+    }
+
+    return res.status(201).json(createdChat);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 module.exports = router;
