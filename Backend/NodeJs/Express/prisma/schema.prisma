@@ -56,15 +56,26 @@ model Bid {
 }
 
 model Chat {
-  id       Int  @id @default(autoincrement())
-  seller   User @relation(fields: [sellerId], references: [id])
-  sellerId Int
+  id           Int            @id @default(autoincrement())
+  seller       User           @relation(fields: [sellerId], references: [id])
+  sellerId     Int
+  buyerId      Int
+  productId    Int
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  chatMessages ChatMessages[]
 
   @@map("chat")
 }
 
 model ChatMessages {
-  id Int @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
+  Chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    Int
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  message   String
 
   @@map("chatmessages")
 }

@@ -26,8 +26,20 @@ const createBid = (bid) => {
   });
 };
 
+const acceptBid = (bidId) => {
+  return db.bid.update({
+    where: {
+      id: bidId,
+    },
+    data: {
+      isBidAccepted: true,
+    },
+  });
+};
+
 module.exports = {
   createBid,
   getAllBids,
   getBid,
+  acceptBid,
 };

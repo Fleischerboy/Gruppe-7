@@ -1,0 +1,7 @@
+// todo: sjekke at vi sender riktig statuscode
+201 ⇒ Created
+200 ⇒ Ok
+400 ⇒ Bad Request
+404 ⇒ Not Found
+409 ⇒ Conflict
+500 ⇒ Internal Server Error
