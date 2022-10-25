@@ -12,24 +12,27 @@ const { getProductById } = require('../products/products.service');
 router.get('/api/bids', async (req, res) => {
   try {
     const bids = await getAllBids();
-    if (bids != null) {
-      res.json(bids);
+    if (bids) {
+      return res.json(bids);
     }
+    return res.status(404).send('did not find this resource');
   } catch (err) {
     console.log(err);
+    return res.status(500).send('Failed finding bids');
   }
 });
 
 router.get('/api/bids/:bidId', async (req, res) => {
   try {
     const bidId = parseInt(req.params.bidId);
-    console.log(bidId);
     const bid = await getBid(bidId);
-    if (bid != null) {
-      res.json(bid);
+    if (bid) {
+      return res.json(bid);
     }
+    return res.status(404).send('did not find this resource');
   } catch (err) {
     console.log(err);
+    return res.status(500).send('failed finding bid');
   }
 });
 

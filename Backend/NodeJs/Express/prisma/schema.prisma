@@ -20,7 +20,8 @@ model User {
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
   products           Product[]
-  Bid                Bid[]
+  bid                Bid[]
+  chat               Chat[]
 
   @@map("user")
 }
@@ -52,4 +53,18 @@ model Bid {
   isBidAccepted  Boolean @default(false)
 
   @@map("bid")
+}
+
+model Chat {
+  id       Int  @id @default(autoincrement())
+  seller   User @relation(fields: [sellerId], references: [id])
+  sellerId Int
+
+  @@map("chat")
+}
+
+model ChatMessages {
+  id Int @id @default(autoincrement())
+
+  @@map("chatmessages")
 }
