@@ -5,3 +5,16 @@
 404 ⇒ Not Found
 409 ⇒ Conflict
 500 ⇒ Internal Server Error
+
+
+
+http://localhost:3000/api/chats/:userId 
+
+
+http://localhost:3000/api/chats/:userId/:chatId
+
+
+http://localhost:3000/api/chats/:userId/:chatId/newMessage
+
+
+http://localhost:3000/api/chats/:userId/:chatId/messages

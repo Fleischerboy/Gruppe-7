@@ -1,16 +1,35 @@
 const {
   createMsg,
-  getChatById,
+  getChatsByUserId,
+  userChatById,
   getMessages,
 } = require('./chat.service');
 
-const getAllChats = (req, res) => {};
+const getAllChatsByUserId = async (req, res) => {
+  const userId = parseInt(req.params.userId);
+  const { chatType } = req.body;
 
-const createdChat = (req, res) => {};
+  if (!chatType) return res.status(400).send('Missing chatType');
 
-const geChatById = async (req, res) => {
+  /*
+  if (!chatType === 'sellerId' || 'buyerId')
+    return res.status(400).send('do not support this type');
+    */
+
+  const getChats = await getChatsByUserId({ userId, chatType });
+
+  if (!getChats)
+    return res.status(404).send('could not find any chat');
+
+  return res.status(200).json(getChats);
+};
+
+//const createdChat = (req, res) => {};
+
+const getUserChatById = async (req, res) => {
+  const userId = parseInt(req.params.userId);
   const chatId = parseInt(req.params.chatId);
-  const getChat = await getChatById({ chatId });
+  const getChat = await userChatById({ chatId, userId });
 
   if (!getChat) return res.status(404).send('could not find chat');
 
@@ -18,8 +37,9 @@ const geChatById = async (req, res) => {
 };
 
 const getAllMessagesByChatId = async (req, res) => {
+  const userId = parseInt(req.params.userId);
   const chatId = parseInt(req.params.chatId);
-  const getChat = await getChatById({ chatId });
+  const getChat = await userChatById({ chatId, userId });
 
   if (!getChat) return res.status(404).send('could not find chat');
 
@@ -33,7 +53,8 @@ const getAllMessagesByChatId = async (req, res) => {
 
 const createMessageToASpecificChat = async (req, res) => {
   const chatId = parseInt(req.params.chatId);
-  const { userId, message } = req.body;
+  const userId = parseInt(req.params.userId);
+  const { message } = req.body;
 
   if (!userId) {
     return res.status(400).send('Missing userId');
@@ -50,6 +71,7 @@ const createMessageToASpecificChat = async (req, res) => {
 
 module.exports = {
   createMessageToASpecificChat,
-  geChatById,
+  getUserChatById,
   getAllMessagesByChatId,
+  getAllChatsByUserId,
 };

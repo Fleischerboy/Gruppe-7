@@ -3,7 +3,10 @@ const {
   exist,
   createMessage,
   getAllMessagesByChatId,
+  getChats,
 } = require('../chat/chat.repository');
+
+const { findUserById } = require('../users/users.services');
 
 const createChat = async (data) => {
   const { productOwnerId, bidUserId, productId } = data;
@@ -22,7 +25,10 @@ const createChat = async (data) => {
 const createMsg = async (data) => {
   try {
     const { userId, chatId, message } = data;
-    console.log('hva er dette ', data);
+
+    const checkIfUserExist = await findUserById(userId);
+
+    if (!checkIfUserExist) return;
 
     const checkIfChatExist = await exist({ chatId });
 
@@ -56,9 +62,31 @@ const getMessages = async (data) => {
   }
 };
 
-const getChatById = async (identifier) => {
+const getChatsByUserId = async (data) => {
   try {
-    const { chatId } = identifier;
+    const { userId, chatType } = data;
+
+    const checkIfUserExist = await findUserById(userId);
+
+    if (!checkIfUserExist) return;
+
+    const chats = await getChats({ userId, chatType });
+
+    if (!chats) return;
+
+    return chats;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const userChatById = async (identifier) => {
+  try {
+    const { userId, chatId } = identifier;
+
+    const checkIfUserExist = await findUserById(userId);
+    if (!checkIfUserExist) return;
+
     const getChat = await exist({ chatId });
 
     if (!getChat) return;
@@ -71,7 +99,8 @@ const getChatById = async (identifier) => {
 
 module.exports = {
   createChat,
+  getChatsByUserId,
+  userChatById,
   createMsg,
-  getChatById,
   getMessages,
 };
