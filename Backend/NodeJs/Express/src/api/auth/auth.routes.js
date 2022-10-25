@@ -8,7 +8,7 @@ const {
   findUserById,
 } = require('../users/users.services');
 
-router.post('/signup', async (req, res, next) => {
+router.post('/api/signup', async (req, res, next) => {
   try {
     // Get user input
     const { fullname, email, password } = req.body;
@@ -44,7 +44,7 @@ router.post('/signup', async (req, res, next) => {
 }); 
 
 
-router.post('/signin', async (req, res, next) => {
+router.post('/api/signin', async (req, res, next) => {
   // Extracting password and email from request
   const { email, password } = req.body;
 

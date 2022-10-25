@@ -9,7 +9,7 @@ const {
 
 const { getProductById } = require('../products/products.service');
 
-router.get('/bids', async (req, res) => {
+router.get('/api/bids', async (req, res) => {
   try {
     const bids = await getAllBids();
     if (bids != null) {
@@ -20,7 +20,7 @@ router.get('/bids', async (req, res) => {
   }
 });
 
-router.get('/bids/:bidId', async (req, res) => {
+router.get('/api/bids/:bidId', async (req, res) => {
   try {
     const bidId = parseInt(req.params.bidId);
     console.log(bidId);
@@ -34,7 +34,7 @@ router.get('/bids/:bidId', async (req, res) => {
 });
 
 router.post(
-  '/products/:productId/createbid',
+  '/api/products/:productId/createbid',
   auth,
   async (req, res) => {
     try {
