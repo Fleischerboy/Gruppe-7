@@ -21,12 +21,14 @@ router.get('/api/chats/:userId/:chatId', async (req, res) => {
   await getUserChatById(req, res);
 });
 
+
 router.get(
   '/api/chats/:userId/:chatId/messages',
   async (req, res) => {
     await getAllMessagesByChatId(req, res);
   }
 );
+
 
 router.post(
   '/api/chats/:userId/:chatId/newMessage',
