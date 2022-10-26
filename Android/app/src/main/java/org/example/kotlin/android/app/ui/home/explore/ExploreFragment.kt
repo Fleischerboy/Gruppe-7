@@ -74,7 +74,6 @@ class ExploreFragment : BaseFragment<ExploreViewModel, FragmentExploreBinding, P
 
 
 
-
     }
 
 

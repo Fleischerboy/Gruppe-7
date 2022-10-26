@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chatCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/productCardView"
     android:layout_margin="5dp"
     android:background="@color/lightGray"
     app:cardCornerRadius="12dp"
     app:cardElevation="3dp"
-    app:contentPadding="4dp">
+    app:contentPadding="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout">
+        android:clipToPadding="false"
+        android:contentDescription="@string/chatInfo">
 
         <ImageView
             android:id="@+id/productImgItem"
             android:layout_width="175dp"
-            android:layout_height="175dp"
-            android:contentDescription="@string/Description"
+            android:layout_height="100dp"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/product_image"
+            android:padding="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ImageContrastCheck"
@@ -30,9 +34,9 @@
             android:id="@+id/tvProductHeader"
             android:layout_width="170dp"
             android:layout_height="39dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@string/header"
+            android:text="@string/title"
             android:textSize="30sp"
             app:layout_constraintLeft_toRightOf="@+id/productImgItem"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,13 +44,17 @@
         <TextView
             android:id="@+id/tvProductDescription"
             android:layout_width="170dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="24dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/chatInfo"
+            android:text="@string/Description"
             android:textSize="16sp"
-            android:text="@string/description"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tvProductHeader"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tvProductHeader"
-            app:layout_constraintTop_toBottomOf="@+id/tvProductHeader" />
+            app:layout_constraintTop_toBottomOf="@+id/tvProductHeader"
+            app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

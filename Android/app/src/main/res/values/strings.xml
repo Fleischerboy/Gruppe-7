@@ -30,4 +30,18 @@
     <string name="price">price</string>
     <string name="productTitle">Product Title</string>
     <string name="productid">productId</string>
+    <string name="bids">bids</string>
+    <string name="sell_chats">sell chats</string>
+    <string name="buy_chats">buy chats</string>
+    <string name="inbox_fragment">Inbox Fragment</string>
+    <string name="chats">chats</string>
+    <string name="chatactivity">ChatActivity</string>
+    <string name="selling">Selling</string>
+    <string name="buying">Buying</string>
+    <string name="chatInfo" />
+    <string name="your_selling_chats">Your selling chats</string>
+    <string name="your_buying_chats">Your buying chats</string>
+    <string name="type_a_message">Type a message</string>
+    <string name="this_is_sent_message">this is sent message</string>
+    <string name="this_is_receive_message">this is receive message</string>
 </resources>

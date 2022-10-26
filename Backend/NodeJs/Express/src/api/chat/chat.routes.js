@@ -31,6 +31,7 @@ router.get(
 router.post(
   '/api/chats/:userId/:chatId/newMessage',
   async (req, res) => {
+    console.log('jeg ble kalt');
     await createMessageToASpecificChat(req, res);
   }
 );

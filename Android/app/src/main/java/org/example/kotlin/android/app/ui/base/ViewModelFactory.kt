@@ -8,6 +8,9 @@ import androidx.lifecycle.ViewModelProvider
 import org.example.kotlin.android.app.data.repository.*
 import org.example.kotlin.android.app.ui.auth.AuthViewModel
 import org.example.kotlin.android.app.ui.home.explore.ExploreViewModel
+import org.example.kotlin.android.app.ui.home.inbox.InboxViewModel
+import org.example.kotlin.android.app.ui.home.inbox.chat_system.chat.ChatViewModel
+import org.example.kotlin.android.app.ui.home.inbox.chat_system.chats.ChatsViewModel
 import org.example.kotlin.android.app.ui.home.productOverview.ProductViewModel
 import org.example.kotlin.android.app.ui.home.profile.ProfileViewModel
 import org.example.kotlin.android.app.ui.home.sell.SellViewModel
@@ -24,7 +27,10 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> ProfileViewModel(repository as UserRepository) as T
             modelClass.isAssignableFrom(ExploreViewModel::class.java) -> ExploreViewModel(repository as ProductRepository) as T
             modelClass.isAssignableFrom(SellViewModel::class.java) -> SellViewModel(repository as SellRepository) as T
-           modelClass.isAssignableFrom(ProductViewModel::class.java) -> ProductViewModel(repository as ProductRepository) as T
+            modelClass.isAssignableFrom(ProductViewModel::class.java) -> ProductViewModel(repository as ProductRepository) as T
+            modelClass.isAssignableFrom(InboxViewModel::class.java) -> InboxViewModel(repository as InboxRepository) as T
+            modelClass.isAssignableFrom(ChatsViewModel::class.java) -> ChatsViewModel(repository as ChatsRepository) as T
+            modelClass.isAssignableFrom(ChatViewModel::class.java) -> ChatViewModel(repository as ChatRepository) as T
             else -> throw  IllegalArgumentException("ViewModelClass Not Found");
         }
     }

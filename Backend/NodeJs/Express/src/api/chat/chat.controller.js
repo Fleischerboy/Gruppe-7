@@ -5,9 +5,10 @@ const {
   getMessages,
 } = require('./chat.service');
 
+
 const getAllChatsByUserId = async (req, res) => {
   const userId = parseInt(req.params.userId);
-  const { chatType } = req.body;
+  const chatType = req.query.chatType;
 
   if (!chatType) return res.status(400).send('Missing chatType');
 
@@ -16,12 +17,11 @@ const getAllChatsByUserId = async (req, res) => {
     return res.status(400).send('do not support this type');
     */
 
-  const getChats = await getChatsByUserId({ userId, chatType });
+  const chats = await getChatsByUserId({ userId, chatType });
 
-  if (!getChats)
-    return res.status(404).send('could not find any chat');
+  if (!chats) return res.status(404).send('could not find any chat');
 
-  return res.status(200).json(getChats);
+  return res.status(200).json(chats);
 };
 
 //const createdChat = (req, res) => {};

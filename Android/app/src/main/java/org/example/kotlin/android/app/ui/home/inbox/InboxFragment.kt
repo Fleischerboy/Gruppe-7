@@ -1,33 +1,46 @@
 package org.example.kotlin.android.app.ui.home.inbox
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import org.example.kotlin.android.app.R
+import org.example.kotlin.android.app.data.repository.InboxRepository
+import org.example.kotlin.android.app.data.restapi.InboxApi
+import org.example.kotlin.android.app.databinding.FragmentInboxBinding
+import org.example.kotlin.android.app.ui.base.BaseFragment
+import org.example.kotlin.android.app.ui.home.inbox.chat_system.ChatActivity
 
 
+class InboxFragment : BaseFragment<InboxViewModel, FragmentInboxBinding, InboxRepository>() {
 
-
-class InboxFragment : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inbox, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Todo
+
+
+        binding.btnChats.setOnClickListener {
+            val chatActivityIntent = Intent(it.context, ChatActivity::class.java)
+            startActivity(chatActivityIntent)
+        }
+
     }
+
+
+    override fun getViewModel(): Class<InboxViewModel> {
+        return InboxViewModel::class.java
+    }
+
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentInboxBinding = FragmentInboxBinding.inflate(inflater, container, false)
+
+    override fun getFragmentRepository(): InboxRepository {
+        val api = remoteDataSource.buildServiceApi(InboxApi::class.java)
+        return InboxRepository(api);
+    }
+
+
 }

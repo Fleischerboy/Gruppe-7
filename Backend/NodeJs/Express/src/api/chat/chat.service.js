@@ -5,6 +5,7 @@ const {
   getAllMessagesByChatId,
   getChats,
 } = require('../chat/chat.repository');
+const { getProductById } = require('../products/products.service');
 
 const { findUserById } = require('../users/users.services');
 
@@ -25,7 +26,7 @@ const createChat = async (data) => {
 const createMsg = async (data) => {
   try {
     const { userId, chatId, message } = data;
-
+    console.log(data)
     const checkIfUserExist = await findUserById(userId);
 
     if (!checkIfUserExist) return;
@@ -36,7 +37,7 @@ const createMsg = async (data) => {
 
     const createdMessage = await createMessage({
       userId: parseInt(userId),
-      chatId,
+      chatId: parseInt(chatId),
       message,
     });
 
@@ -74,7 +75,9 @@ const getChatsByUserId = async (data) => {
 
     if (!chats) return;
 
-    return chats;
+    const updatedChat = updateChatResponse(chats);
+
+    return updatedChat;
   } catch (error) {
     console.log(error);
   }
@@ -95,6 +98,24 @@ const userChatById = async (identifier) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+const updateChatResponse = async (array) => {
+  let updatedChatList = [];
+  const updated = array.map(async (element) => {
+    const chatProduct = await getProductById(element.productId);
+    const new_Obj = {
+      ...element,
+      product: {
+        title: chatProduct.title,
+        img: chatProduct.imageUrl,
+      },
+    };
+    updatedChatList.push(new_Obj);
+  });
+
+  await Promise.all(updated);
+  return updatedChatList;
 };
 
 module.exports = {
