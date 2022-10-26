@@ -26,7 +26,7 @@ const createChat = async (data) => {
 const createMsg = async (data) => {
   try {
     const { userId, chatId, message } = data;
-    console.log(data)
+    console.log(data);
     const checkIfUserExist = await findUserById(userId);
 
     if (!checkIfUserExist) return;
@@ -99,7 +99,6 @@ const userChatById = async (identifier) => {
     console.log(error);
   }
 };
-¨
 
 const updateChatResponse = async (array) => {
   let updatedChatList = [];
