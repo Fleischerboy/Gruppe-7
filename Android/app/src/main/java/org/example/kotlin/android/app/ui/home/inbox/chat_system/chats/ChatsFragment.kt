@@ -46,7 +46,12 @@ class ChatsFragment : BaseFragment<ChatsViewModel, FragmentChatsBinding, ChatsRe
 
         chatBuyingAdapter.setOnClickListener(object : ChatsViewHolderInterface {
             override fun onItemClickListener(chatResponse: ChatResponse, view: View) {
-
+                println(chatResponse);
+                val chatId = chatResponse.id;
+                val productTitle = chatResponse.product.title
+                val navController = view.findNavController();
+                val action = ChatsFragmentDirections.actionChatsFragmentToChatFragment(chatId, productTitle, userId)
+                navController.navigate(action);
             }
 
         })
