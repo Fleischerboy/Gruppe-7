@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "start": "set NODE_ENV=development&& node Backend/NodeJs/Express/src/api/index.js",
+    "start-prod": "set NODE_ENV=production&& node Backend/NodeJs/Express/src/api/index.js"
+  }
+}

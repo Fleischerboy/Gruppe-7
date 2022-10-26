@@ -42,6 +42,9 @@ class ChatsFragment : BaseFragment<ChatsViewModel, FragmentChatsBinding, ChatsRe
             }
 
 
+
+            
+
         })
 
         chatBuyingAdapter.setOnClickListener(object : ChatsViewHolderInterface {
