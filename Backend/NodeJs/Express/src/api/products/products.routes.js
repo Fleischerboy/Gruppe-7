@@ -17,6 +17,7 @@ router.get('/api/products', async (req, res, next) => {
       res.json(products);
     }
   } catch (err) {
+    console.log(err);
     next();
   }
 });
