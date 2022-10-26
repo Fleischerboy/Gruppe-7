@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "set NODE_ENV=development&& node src/api/index.js",
-    "start-prod": "set NODE_ENV=production&& node src/api/index.js"
+    "start": "set NODE_ENV=development&& node Backend/NodeJs/Express/src/api/index.js",
+    "start-prod": "set NODE_ENV=production&& node Backend/NodeJs/Express/src/api/index.js"
   },
   "repository": {
     "type": "git",
