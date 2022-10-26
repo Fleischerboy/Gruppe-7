@@ -31,8 +31,5 @@
   },
   "engines": {
     "node": "16.16.0"
-  },
-  "prisma": {
-    "seed": "node prisma/runfile prisma/seed.ts"
   }
 }
