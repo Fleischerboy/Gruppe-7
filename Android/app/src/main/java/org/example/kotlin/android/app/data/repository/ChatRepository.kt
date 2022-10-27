@@ -18,7 +18,7 @@ class ChatRepository(
         while (true) {
             val latestMessages = api.getAllMessagesByChatId(userId, chatId)
             emit(safeApiCall { latestMessages })
-            delay(1000)
+
         }
     }
 

@@ -81,7 +81,7 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
         )
 
         //TODO ADD INPUT VALIDATION
-        viewModel.login(userLoginInfo2);
+        viewModel.login(userLoginInfo1);
     }
 
     override fun getViewModel(): Class<AuthViewModel> = AuthViewModel::class.java
