@@ -11,9 +11,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="225dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="125dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/product_image"
         android:src="@drawable/ic_baseline_cloud_upload_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -25,72 +26,93 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Sell it!"
-        app:layout_constraintEnd_toEndOf="@+id/edDescription"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="@+id/edDescription"
-        app:layout_constraintTop_toBottomOf="@+id/edDescription" />
-
-    <EditText
-        android:id="@+id/edProductTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/title"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/galleryBtn"
-        app:layout_constraintStart_toStartOf="@+id/cameraBtn"
-        app:layout_constraintTop_toBottomOf="@+id/cameraBtn" />
-
-    <EditText
-        android:id="@+id/edProductPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Price"
-        android:inputType="number"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/edProductTitle"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/edProductTitle"
-        app:layout_constraintTop_toBottomOf="@+id/edProductTitle" />
-
-    <EditText
-        android:id="@+id/edDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/Description"
-        android:inputType="textMultiLine"
-        android:lines="4"
-        android:minHeight="38dp"
-        android:scrollbars="vertical"
-        app:layout_constraintEnd_toEndOf="@+id/edProductPrice"
-        app:layout_constraintStart_toStartOf="@+id/edProductPrice"
-        app:layout_constraintTop_toBottomOf="@+id/edProductPrice" />
-
-    <Button
-        android:id="@+id/cameraBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Camera"
-        app:layout_constraintBottom_toBottomOf="@+id/galleryBtn"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        android:text="@string/sell_it"
+        app:layout_constraintEnd_toEndOf="@+id/priceContainer"
+        app:layout_constraintStart_toStartOf="@+id/priceContainer"
+        app:layout_constraintTop_toBottomOf="@+id/priceContainer" />
 
     <Button
         android:id="@+id/galleryBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Gallery"
+        android:layout_marginTop="16dp"
+        android:text="@string/gallery"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/titleContainer"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/title"
+        app:helperText="@string/required"
+        app:helperTextTextColor="@color/red"
+        app:layout_constraintEnd_toEndOf="@+id/galleryBtn"
+        app:layout_constraintStart_toStartOf="@+id/galleryBtn"
+        app:layout_constraintTop_toBottomOf="@+id/galleryBtn">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edProductTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColorHint="#616161" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/descriptionContainer"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/Description"
+        app:helperText="required"
+        app:helperTextTextColor="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleContainer">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:lines="4"
+            android:textColorHint="#616161" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/priceContainer"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/Price"
+        app:helperText="required"
+        app:helperTextTextColor="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionContainer">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edProductPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

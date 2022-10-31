@@ -28,20 +28,12 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="76dp"
         android:text="@string/sign_up_with_your_email_and_mobile_to_register"
+        android:textColor="#616161"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/tvCreateNewAccount"
         app:layout_constraintTop_toBottomOf="@+id/tvCreateNewAccount" />
 
-    <Button
-        android:id="@+id/signUpBtn"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/sign_up"
-        app:cornerRadius="50dp"
-        app:layout_constraintEnd_toEndOf="@+id/etSignUpPassword"
-        app:layout_constraintStart_toStartOf="@+id/etSignUpPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etSignUpPassword" />
+
 
 
     <EditText
@@ -56,23 +48,27 @@
         android:inputType="text"
         android:minHeight="48dp"
         android:paddingStart="25dp"
+        android:textColorHint="#78909C"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSignUpInfo" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/etSignUpEmail"
+        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox.Dense"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/et_styles"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
+
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:paddingStart="25dp"
+        android:textColorHint="#78909C"
         app:layout_constraintEnd_toEndOf="@+id/etSignUpFullName"
         app:layout_constraintStart_toStartOf="@+id/etSignUpFullName"
         app:layout_constraintTop_toBottomOf="@+id/etSignUpFullName" />
@@ -89,10 +85,12 @@
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:paddingLeft="25dp"
+        android:textColorHint="#78909C"
         app:layout_constraintEnd_toEndOf="@+id/etSignUpEmail"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/etSignUpEmail"
-        app:layout_constraintTop_toBottomOf="@+id/etSignUpEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/etSignUpEmail"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/tvSignIn"
@@ -100,9 +98,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/already_have_an_account_sign_in"
+        android:textColor="#616161"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/signUpBtn"
         app:layout_constraintStart_toStartOf="@+id/signUpBtn"
         app:layout_constraintTop_toBottomOf="@+id/signUpBtn" />
+
+    <Button
+        android:id="@+id/signUpBtn"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/sign_up"
+        app:cornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="@+id/etSignUpPassword"
+        app:layout_constraintStart_toStartOf="@+id/etSignUpPassword"
+        app:layout_constraintTop_toBottomOf="@+id/etSignUpPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

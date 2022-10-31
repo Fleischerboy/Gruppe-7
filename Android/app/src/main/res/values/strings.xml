@@ -44,4 +44,10 @@
     <string name="type_a_message">Type a message</string>
     <string name="this_is_sent_message">this is sent message</string>
     <string name="this_is_receive_message">this is receive message</string>
+    <string name="Title" />
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="Price">Price</string>
+    <string name="sell_it">Sell it!</string>
+    <string name="required">Required</string>
 </resources>
