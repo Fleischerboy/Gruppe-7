@@ -26,7 +26,6 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerViewHome) as NavHostFragment
         val navController = navHostFragment.navController
         val appBarConfiguration = AppBarConfiguration(setOf(R.id.exploreFragment, R.id.sellFragment, R.id.inboxFragment, R.id.profileFragment))

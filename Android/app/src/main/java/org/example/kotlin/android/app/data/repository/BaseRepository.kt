@@ -14,7 +14,7 @@ we will inherit(arve) this class til our actual concrete repository classes.
 abstract class BaseRepository {
 
     // function for safely call the api
-    suspend fun <T> safeApiCall(apiCall: suspend () -> T) : Resource<T> {
+    suspend fun <T> safeApiCall(apiCall: suspend() -> T) : Resource<T> {
         return withContext(Dispatchers.IO) {
             try {
                 Resource.Success(apiCall.invoke())

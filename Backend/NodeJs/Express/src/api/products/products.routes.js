@@ -5,23 +5,24 @@ const {
   createProduct,
   getAllProducts,
   getUserProductsById,
-  getProduct,
+  getProductById,
 } = require('../products/products.service');
 
 const { findUserById } = require('../users/users.services');
 
-router.get('/products', async (req, res, next) => {
+router.get('/api/products', async (req, res, next) => {
   try {
     const products = await getAllProducts();
     if (products != null) {
       res.json(products);
     }
   } catch (err) {
+    console.log(err);
     next();
   }
 });
 
-router.get('/users/:userId/products', async (req, res) => {
+router.get('/api/users/:userId/products', async (req, res) => {
   try {
     const userId = req.params.userId;
     const findUser = await findUserById(userId);
@@ -37,12 +38,10 @@ router.get('/users/:userId/products', async (req, res) => {
   }
 });
 
-router.get('/products/:productId', async (req, res, next) => {
+router.get('/api/products/:productId', async (req, res, next) => {
   try {
     const productId = parseInt(req.params.productId);
-    console.log(productId);
-    console.log('yes');
-    const product = await getProduct(productId);
+    const product = await getProductById(productId);
     if (product != null) {
       res.json(product);
     }
@@ -52,7 +51,7 @@ router.get('/products/:productId', async (req, res, next) => {
 });
 
 router.post(
-  '/users/:userId/createProduct',
+  '/api/users/:userId/createProduct',
   auth,
   async (req, res, next) => {
     try {

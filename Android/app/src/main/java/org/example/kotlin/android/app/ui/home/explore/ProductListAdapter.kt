@@ -32,7 +32,7 @@ class ProductListAdapter() : ListAdapter<ProductResponse, ProductListAdapter.Pro
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
 
         // Inflates the movie_list_item.xml to a view for us
-        val cardProduct = ProductCardViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val cardProduct = org.example.kotlin.android.app.databinding.ProductCardViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProductViewHolder(cardProduct);
     }
 
@@ -47,6 +47,7 @@ class ProductListAdapter() : ListAdapter<ProductResponse, ProductListAdapter.Pro
         private val tvProductHeader: TextView = binding.tvProductHeader
         private val tvProductDescription: TextView = binding.tvProductDescription
         private val productViewHolder = binding.productCardView
+
 
 
         fun bind(product: ProductResponse) {

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_chats"
+    app:startDestination="@id/chatsFragment">
+    <fragment
+        android:id="@+id/chatsFragment"
+        android:name="org.example.kotlin.android.app.ui.home.inbox.chat_system.chats.ChatsFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chats" >
+        <action
+            android:id="@+id/action_chatsFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="org.example.kotlin.android.app.ui.home.inbox.chat_system.chat.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" >
+        <action
+            android:id="@+id/action_chatFragment_to_chatsFragment"
+            app:destination="@id/chatsFragment" />
+        <argument
+            android:name="chatId"
+            app:argType="integer" />
+        <argument
+            android:name="productTitle"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="userId"
+            app:argType="string" />
+    </fragment>
+</navigation>

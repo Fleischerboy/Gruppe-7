@@ -20,9 +20,11 @@
             android:id="@+id/productImgItem"
             android:layout_width="175dp"
             android:layout_height="175dp"
-            tools:src="@mipmap/ic_launcher"
+            android:contentDescription="@string/Description"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            tools:ignore="ImageContrastCheck"
+            tools:src="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/tvProductHeader"

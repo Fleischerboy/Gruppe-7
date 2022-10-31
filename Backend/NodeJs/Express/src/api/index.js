@@ -11,11 +11,17 @@ app.use(bodyParser.urlencoded({ extended: true })); // accept url encoded params
 const auth = require('./auth/auth.routes');
 const users = require('./users/users.routes');
 const products = require('../api/products/products.routes');
+const bids = require('./bids/bids.routes');
+const chat = require('./chat/chat.routes');
 app.use(auth);
 
 app.use(users);
 
 app.use(products);
+
+app.use(bids);
+
+app.use(chat);
 
 const port = 3000;
 // start server

@@ -76,8 +76,8 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
             userPassword = "missi123"
         )
         val userLoginInfo2 = SignIn(
-            userEmail = "philipboy@hotmail.com",
-            userPassword = "missii"
+            userEmail = "fred@hotmail.com",
+            userPassword = "fred123"
         )
 
         //TODO ADD INPUT VALIDATION

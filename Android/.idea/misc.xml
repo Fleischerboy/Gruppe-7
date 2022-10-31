@@ -28,6 +28,25 @@
         <entry key="..\:/Skole/code/AndroidDevelopment/Gruppe-7/Android/app/src/main/res/layout/product_card_profile_view.xml" value="0.33" />
         <entry key="..\:/Skole/code/AndroidDevelopment/Gruppe-7/Android/app/src/main/res/layout/product_card_view.xml" value="0.22" />
         <entry key="..\:/Skole/code/AndroidDevelopment/Gruppe-7/Android/app/src/main/res/menu/bottom_nav_menu.xml" value="0.33" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout-v28/receive.xml" value="0.3614583333333333" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/activity_auth.xml" value="0.11574074074074074" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/activity_chat.xml" value="0.25" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/activity_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/activity_product.xml" value="0.1" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/fragment_chat.xml" value="0.3181818181818182" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/fragment_chats.xml" value="0.3569230769230769" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/fragment_explore.xml" value="0.36666666666666664" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/fragment_inbox.xml" value="0.33" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/fragment_login.xml" value="0.36666666666666664" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/fragment_product_overview.xml" value="0.36666666666666664" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/fragment_seller.xml" value="0.22314814814814815" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/product_card_profile_view.xml" value="0.36666666666666664" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/product_card_view.xml" value="0.36666666666666664" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/product_chat_card_view.xml" value="0.36102564102564105" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/receive.xml" value="0.3625" />
+        <entry key="..\:/Skole/code/AndroidDevelopment/androidApp/Gruppe-7/Android/app/src/main/res/layout/sent.xml" value="0.3614583333333333" />
       </map>
     </option>
   </component>

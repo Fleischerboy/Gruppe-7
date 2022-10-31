@@ -13,7 +13,7 @@ const getUserProductsById = (id) => {
   });
 };
 
-const getProduct = (id) => {
+const getProductById = (id) => {
   return db.product.findUnique({
     where: {
       id: id,
@@ -47,5 +47,5 @@ module.exports = {
   createProduct,
   getAllProducts,
   getUserProductsById,
-  getProduct,
+  getProductById,
 };

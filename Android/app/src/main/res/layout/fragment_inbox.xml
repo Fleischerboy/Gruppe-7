@@ -12,10 +12,34 @@
         android:id="@+id/tvInbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Inbox Fragment"
+        android:text="@string/inbox_fragment"
+        android:textColor="#616161"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.082" />
+
+    <Button
+        android:id="@+id/btnBids"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:text="@string/bids"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnChats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/chats"
+        app:layout_constraintEnd_toEndOf="@+id/btnBids"
+        app:layout_constraintStart_toStartOf="@+id/btnBids"
+        app:layout_constraintTop_toBottomOf="@+id/btnBids" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
