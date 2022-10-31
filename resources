@@ -9,4 +9,7 @@ On how to hash and salt the passwords with libary called crypto: https://www.you
 android:
 MVVM: https://simplifiedcoding.in/course/android-mvvm-architecture-tutorial/start/1 
 
-image upload to AWS-s3-bucket: https://mathursanb.medium.com/how-to-upload-images-to-aws-s3-from-the-android-app-a35c603ac9c9
+Image upload to AWS-s3-bucket: https://mathursanb.medium.com/how-to-upload-images-to-aws-s3-from-the-android-app-a35c603ac9c9
+
+Design og xml filer for chat og adapter(skal forkalere hva denne adpteren gjør senere): https://www.youtube.com/watch?v=8Pv96bvBJL4&t=4682s&ab_channel=GeeksforGeeks
+flow og flow med bruk av retrofit bibloteket: https://developer.android.com/kotlin/flow og https://levelup.gitconnected.com/android-basic-app-using-mvvm-hilt-coroutines-flow-retrofit-and-coil-433763542ee0
