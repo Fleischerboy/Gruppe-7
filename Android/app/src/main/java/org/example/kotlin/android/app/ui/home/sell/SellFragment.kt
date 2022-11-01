@@ -84,7 +84,6 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding, SellReposi
     }
 
     private fun submitForm() {
-
         binding.titleContainer.helperText = validateTitle();
         binding.descriptionContainer.helperText = validateDescription();
         binding.priceContainer.helperText = validatePriceInput();
