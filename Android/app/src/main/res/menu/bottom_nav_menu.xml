@@ -3,26 +3,26 @@
 
     <item
         android:id="@+id/exploreFragment"
-        android:title="@string/utforsk"
+        android:title="@string/Explore"
         android:icon="@drawable/ic_baseline_home_24"
     />
 
 
     <item
         android:id="@+id/sellFragment"
-        android:title="@string/selg"
+        android:title="@string/Sell"
         android:icon="@drawable/ic_baseline_photo_camera_24"
         />
 
     <item
         android:id="@+id/inboxFragment"
-        android:title="@string/innboks"
+        android:title="@string/Inbox"
         android:icon="@drawable/ic_baseline_mail_24"
        />
 
     <item
         android:id="@+id/profileFragment"
-        android:title="@string/profil"
+        android:title="@string/Profile"
         android:icon="@drawable/ic_baseline_person_24"
       />
 </menu>
