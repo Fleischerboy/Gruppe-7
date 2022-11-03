@@ -9,6 +9,7 @@ import org.example.kotlin.android.app.data.repository.InboxRepository
 import org.example.kotlin.android.app.data.restapi.InboxApi
 import org.example.kotlin.android.app.databinding.FragmentInboxBinding
 import org.example.kotlin.android.app.ui.base.BaseFragment
+import org.example.kotlin.android.app.ui.home.inbox.bid_system.BidActivity
 import org.example.kotlin.android.app.ui.home.inbox.chat_system.ChatActivity
 
 
@@ -19,6 +20,10 @@ class InboxFragment : BaseFragment<InboxViewModel, FragmentInboxBinding, InboxRe
         super.onViewCreated(view, savedInstanceState)
 
 
+        binding.btnBids.setOnClickListener {
+            val bidActivityIntent = Intent(it.context, BidActivity::class.java)
+            startActivity(bidActivityIntent)
+        }
 
         binding.btnChats.setOnClickListener {
             val chatActivityIntent = Intent(it.context, ChatActivity::class.java)

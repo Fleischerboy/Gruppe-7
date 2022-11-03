@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_bid"
+    app:startDestination="@id/bidsFragment">
+    <fragment
+        android:id="@+id/bidsFragment"
+        android:name="org.example.kotlin.android.app.ui.home.inbox.bid_system.bids.BidsOverviewFragment"
+        android:label="fragment_bids"
+        tools:layout="@layout/fragment_bids" />
+</navigation>
