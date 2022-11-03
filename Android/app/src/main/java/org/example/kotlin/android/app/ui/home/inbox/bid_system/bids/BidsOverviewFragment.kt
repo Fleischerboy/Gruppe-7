@@ -9,13 +9,13 @@ import org.example.kotlin.android.app.data.restapi.BidApi
 import org.example.kotlin.android.app.databinding.FragmentBidsBinding
 import org.example.kotlin.android.app.ui.base.BaseFragment
 
-class BidsFragment : BaseFragment<BidsViewModel,FragmentBidsBinding, BidRepository>() {
+class BidsOverviewFragment : BaseFragment<BidsViewModel,FragmentBidsBinding, BidRepository>() {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.textView3.text = "YAYY!"
+        binding.textView3.text = "YAYY det funker nå!!"
     }
 
     override fun getViewModel(): Class<BidsViewModel> {

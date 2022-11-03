@@ -6,7 +6,7 @@
     app:startDestination="@id/bidsFragment">
     <fragment
         android:id="@+id/bidsFragment"
-        android:name="org.example.kotlin.android.app.ui.home.inbox.bid_system.bids.BidsFragment"
+        android:name="org.example.kotlin.android.app.ui.home.inbox.bid_system.bids.BidsOverviewFragment"
         android:label="fragment_bids"
         tools:layout="@layout/fragment_bids" />
 </navigation>

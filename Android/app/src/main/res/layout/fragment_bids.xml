@@ -5,7 +5,7 @@
     android:id="@+id/constraintLayoutBids"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.inbox.bid_system.bids.BidsFragment">
+    tools:context=".ui.home.inbox.bid_system.bids.BidsOverviewFragment">
 
     <TextView
         android:id="@+id/textView3"
