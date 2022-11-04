@@ -15,8 +15,9 @@ class BidsViewModel(private val repository: BidRepository) : BaseViewModel(repos
     val ownersProducts: LiveData<Resource<List<ProductResponse>>> get() = _ownersProducts
 
     //TODO only fetch products with a bid
-    fun getAllProductsByUserId(userId: String) {
-        viewModelScope.launch { repository.getOwnersProductById(userId) }
+    fun getAllProductsByUserId(userId: String) = viewModelScope.launch {
+        _ownersProducts.value = repository.getOwnersProductById(userId)
     }
+
 
 }

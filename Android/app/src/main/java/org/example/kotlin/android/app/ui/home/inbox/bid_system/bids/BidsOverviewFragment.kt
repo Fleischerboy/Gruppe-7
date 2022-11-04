@@ -1,6 +1,7 @@
 package org.example.kotlin.android.app.ui.home.inbox.bid_system.bids
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import org.example.kotlin.android.app.data.restapi.Resource
 import org.example.kotlin.android.app.databinding.FragmentBidsBinding
 import org.example.kotlin.android.app.ui.base.BaseFragment
 import org.example.kotlin.android.app.ui.handleApiError
+import org.example.kotlin.android.app.ui.visible
 
 class BidsOverviewFragment : BaseFragment<BidsViewModel,FragmentBidsBinding, BidRepository>() {
 
@@ -22,7 +24,7 @@ class BidsOverviewFragment : BaseFragment<BidsViewModel,FragmentBidsBinding, Bid
         val userId = runBlocking {userPreferences.getUserId.first()}.toString()
         viewModel.getAllProductsByUserId(userId)
         val productsWithBidAdapter = ProductsWithBidListAdapter()
-
+        Log.d("Print", "value: " + viewModel.ownersProducts.value)
         binding.textViewBids.text = "WTF!"
 
         binding.apply {
@@ -36,14 +38,15 @@ class BidsOverviewFragment : BaseFragment<BidsViewModel,FragmentBidsBinding, Bid
         viewModel.ownersProducts.observe(viewLifecycleOwner) {
             when(it) {
                 is Resource.Success -> {
-                    //binding.exploreProgressBar.visible(false);
+                    binding.bidsProgressBar.visible(false)
                     productsWithBidAdapter.submitList(it.value.toList())
 
                 }
                 is Resource.Loading -> {
-                    //binding.exploreProgressBar.visible(true);
+                    binding.bidsProgressBar.visible(true)
                 }
                 is Resource.Failure -> {
+                    binding.bidsProgressBar.visible(false)
                     handleApiError(it)
                 }
             }
