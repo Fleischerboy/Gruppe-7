@@ -15,7 +15,7 @@ class BidsOverviewFragment : BaseFragment<BidsViewModel,FragmentBidsBinding, Bid
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.textView3.text = "YAYY det funker nå!!"
+        binding.textView3.text = "lister ut produkter som har fått bids (ikke ferdig)"
     }
 
     override fun getViewModel(): Class<BidsViewModel> {
