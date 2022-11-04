@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
 import org.example.kotlin.android.app.R
@@ -48,7 +49,13 @@ class ProductOverviewFragment : BaseFragment<ProductViewModel, FragmentProductOv
             description.text = product.description;
             currentBid.text = "200"
             Picasso.get().load(product.imageUrl).into(imageView);
-
+//            mapsButton.text = product.location;
+            mapsButton.setOnClickListener {
+                val action = ProductOverviewFragmentDirections.actionProductOverviewFragmentToMapsFragment()
+                action.latitude = 59.132164F
+                action.longitude = 11.352F
+                findNavController().navigate(action)
+            }
 
         }
     }
