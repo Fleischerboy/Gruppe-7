@@ -1,5 +1,8 @@
 package org.example.kotlin.android.app.ui.home.sell
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -30,9 +33,13 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
+import java.lang.Integer.parseInt
+import java.util.*
 
 
 class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding, SellRepository>() {
+
+    private var userHasPickedAImage: Boolean = false
 
     private val s3Client = AwsS3bucket().getS3Client(
         S3constants.Constants.ACCESS_ID,
@@ -40,9 +47,14 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding, SellReposi
     )
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        titleFocusListener()
+        descriptionFocusListener()
+        priceFocusListener()
+
+
+        binding.sellbtn.isEnabled = userHasPickedAImage;
 
         viewModel.selectedImage.observe(viewLifecycleOwner, Observer {uri ->
             binding.imageView.setImageURI(uri);
@@ -51,7 +63,7 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding, SellReposi
         viewModel.productResponse.observe(viewLifecycleOwner, Observer {
             when(it) {
                 is Resource.Success -> {
-
+                    println(it.value)
                 }
 
                 is Resource.Failure -> {
@@ -60,46 +72,156 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding, SellReposi
             }
         })
 
-        binding.cameraBtn.setOnClickListener() {
-            // TODO
-
-        }
-
         binding.galleryBtn.setOnClickListener() {
             selectImageFormGallery()
         }
 
 
 
-        binding.sellbtn.setOnClickListener() {
-            val userId = runBlocking { userPreferences.getUserId.first() }
-            val productTitle = binding.edProductTitle.text.toString()
-            val productDescription = binding.edDescription.text.toString()
-            val productPrice = binding.edProductPrice.text.toString();
-            val imageKey = "user$userId$productTitle" // TODO LAGE EN UNIQUE ID VIKTIG!
-            println(imageKey)
-            viewModel.selectedImage.observe(viewLifecycleOwner, Observer {uri ->
-               val uploadImg = uploadImageToAwsS3Bucket(uri, imageKey)
-                println(uploadImg)
-            })
-            if (userId != null) {
-                val imageUrl = s3Client.getResourceUrl("gruppe7s3bucketforandroidapp",
-                    "$imageKey.png"
-                )
-                println("bilde url: $imageUrl")
-                val sellProductInfo = SellProduct(
-                    ownerId = userId.toString(),
-                    title = productTitle,
-                    imageUrl = imageUrl,
-                    productPrice = productPrice,
-                    description = productDescription,
-                    address = "Oslo 1167"
-                )
-                viewModel.sellProduct(userId, sellProductInfo)
-            }
+        binding.sellbtn.setOnClickListener() { submitForm() }
 
+
+    }
+
+    private fun submitForm() {
+        binding.titleContainer.helperText = validateTitle();
+        binding.descriptionContainer.helperText = validateDescription();
+        binding.priceContainer.helperText = validatePriceInput();
+
+
+        // if the container helperText is null we can know for sure its valid.
+        val validTitle = binding.titleContainer.helperText == null;
+        val validDescription = binding.descriptionContainer.helperText == null;
+        val validPrice = binding.priceContainer.helperText == null;
+
+        if(validTitle && validDescription && validPrice) {
+            sellProduct();
+            resetForm();
+        }
+        else {
+           invalidForm()
         }
     }
+
+    private fun invalidForm() {
+       var message = "";
+        if(binding.titleContainer.helperText != null)
+            message += "\n\nTitle: ${binding.titleContainer.helperText}";
+        if(binding.descriptionContainer.helperText != null)
+            message += "\n\nDescription: ${binding.descriptionContainer.helperText}";
+        if(binding.priceContainer.helperText != null)
+            message += "\n\nPrice: ${binding.priceContainer.helperText}"
+
+
+        AlertDialog.Builder(context)
+            .setTitle("Invalid Form")
+            .setMessage(message)
+            .setPositiveButton("Okay") {_,_ ->
+                // do something
+            }.show();
+    }
+
+    private fun resetForm() {
+        var message = "Title: ${binding.edProductTitle.text}"
+            message += "\nDescription: ${binding.edDescription.text}"
+            message += "\nPrice: ${binding.edProductPrice.text}"
+        AlertDialog.Builder(context)
+            .setTitle("Form submitted!")
+            .setMessage(message)
+            .setPositiveButton("Okay") {_,_ ->
+                binding.edProductTitle.text = null;
+                binding.edDescription.text = null;
+                binding.edProductPrice.text = null;
+            }.show();
+        binding.titleContainer.helperText = getString(R.string.required)
+        binding.descriptionContainer.helperText = getString(R.string.required)
+        binding.priceContainer.helperText = getString(R.string.required)
+    }
+
+    private fun sellProduct() {
+
+        val userId = runBlocking { userPreferences.getUserId.first() }
+        val productTitle = binding.edProductTitle.text.toString()
+        val productDescription = binding.edDescription.text.toString()
+        val productPrice = binding.edProductPrice.text.toString();
+
+        val uuid = UUID.randomUUID();
+        val imageKey = "user$userId$productTitle$uuid"
+        println(imageKey)
+        viewModel.selectedImage.observe(viewLifecycleOwner, Observer {uri ->
+            val uploadImg = uploadImageToAwsS3Bucket(uri, imageKey)
+            println(uploadImg)
+        })
+        if (userId != null) {
+            val imageUrl = s3Client.getResourceUrl("gruppe7s3bucketforandroidapp",
+                "$imageKey.png"
+            )
+            println("bilde url: $imageUrl")
+            val sellProductInfo = SellProduct(
+                ownerId = userId.toString(),
+                title = productTitle,
+                imageUrl = imageUrl,
+                productPrice = productPrice,
+                description = productDescription,
+                address = "Oslo 1167"
+            )
+            viewModel.sellProduct(userId, sellProductInfo)
+        }
+
+    }
+
+
+    private fun titleFocusListener() {
+        binding.edProductTitle.setOnFocusChangeListener {_, focus ->
+            if(!focus) {
+                binding.titleContainer.helperText = validateTitle();
+            }
+        }
+    }
+
+    private fun descriptionFocusListener() {
+        binding.edDescription.setOnFocusChangeListener {_, focus ->
+            if(!focus) {
+                binding.descriptionContainer.helperText = validateDescription();
+            }
+        }
+    }
+
+
+    private fun priceFocusListener() {
+        binding.edProductPrice.setOnFocusChangeListener {_, focus ->
+            if(!focus) {
+                binding.priceContainer.helperText = validatePriceInput();
+            }
+        }
+    }
+
+
+    private fun validateTitle(): String? {
+        val titleText = binding.edProductTitle.text.toString();
+        if(titleText.isEmpty()) {
+            return "Invalid Title, must contain at least 1 character!"
+        }
+
+        return null;
+    }
+
+    private fun validateDescription(): String? {
+        val descriptionText = binding.edDescription.text.toString()
+        if(descriptionText.isEmpty()) {
+            return "Invalid description, must contain at least 1 character!"
+        }
+        return null;
+    }
+
+    private fun validatePriceInput(): String? {
+        val price = binding.edProductPrice.text.toString();
+        if(price.isEmpty()) {
+            return "Invalid price, make sure to set a price!"
+        }
+        return null;
+    }
+
 
 
     private fun selectImageFormGallery() {
@@ -113,6 +235,8 @@ class SellFragment : BaseFragment<SellViewModel, FragmentSellBinding, SellReposi
             uri?.let {
                 binding.imageView.setImageURI(uri);
                 viewModel.selectedImageUri(uri)
+                userHasPickedAImage = true;
+                binding.sellbtn.isEnabled = userHasPickedAImage;
 
 
             }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
+import com.google.android.material.color.DynamicColors
 import org.example.kotlin.android.app.data.UserPreferences
 import org.example.kotlin.android.app.databinding.ActivityMainBinding
 import org.example.kotlin.android.app.ui.auth.AuthActivity
