@@ -10,12 +10,12 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.example.kotlin.android.app.R
 import org.example.kotlin.android.app.data.repository.BidRepository
+import org.example.kotlin.android.app.data.responses.BidResponse
 import org.example.kotlin.android.app.data.restapi.BidApi
 import org.example.kotlin.android.app.data.restapi.Resource
 import org.example.kotlin.android.app.databinding.FragmentBidBinding
 import org.example.kotlin.android.app.ui.base.BaseFragment
 import org.example.kotlin.android.app.ui.handleApiError
-import org.example.kotlin.android.app.ui.visible
 
 
 class BidFragment : BaseFragment<BidViewModel, FragmentBidBinding, BidRepository>() {
@@ -28,6 +28,12 @@ class BidFragment : BaseFragment<BidViewModel, FragmentBidBinding, BidRepository
         val productId = args.uid.toString()
         viewModel.getBidsOnProduct(productId)
         val bidListAdapter = BidListAdapter()
+
+        bidListAdapter.setOnClickListener(object : BidInterface {
+            override fun onItemClickListener(bid: BidResponse) {
+                viewModel.acceptBid(bid.id.toString())
+            }
+        })
 
 
         binding.apply {

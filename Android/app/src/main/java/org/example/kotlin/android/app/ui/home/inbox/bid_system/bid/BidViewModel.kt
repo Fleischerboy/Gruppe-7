@@ -19,5 +19,9 @@ class BidViewModel(private val repository: BidRepository) : BaseViewModel(reposi
         _bids.value = repository.getBidsOnProduct(productId)
     }
 
+    fun acceptBid(bidId: String) = viewModelScope.launch {
+        repository.acceptBid(bidId)
+    }
+
 
 }

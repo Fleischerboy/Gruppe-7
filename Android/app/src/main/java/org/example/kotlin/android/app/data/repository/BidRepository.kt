@@ -17,4 +17,7 @@ class BidRepository(private val api: BidApi) : BaseRepository(){
         api.getUserProductsById(userId) }
 
 
+    suspend fun acceptBid(bidId: String) = safeApiCall {
+        api.acceptBid(bidId)
+    }
 }
