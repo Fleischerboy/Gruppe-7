@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import org.example.kotlin.android.app.R
 import org.example.kotlin.android.app.data.repository.BidRepository
 import org.example.kotlin.android.app.data.restapi.BidApi
@@ -26,13 +27,21 @@ class BidFragment : BaseFragment<BidViewModel, FragmentBidBinding, BidRepository
         super.onViewCreated(view, savedInstanceState)
         val productId = args.uid.toString()
         viewModel.getBidsOnProduct(productId)
+        val bidListAdapter = BidListAdapter()
 
+
+        binding.apply {
+            binding.BidsRecycler.apply {
+                adapter = bidListAdapter
+                layoutManager = LinearLayoutManager(context)
+            }
+        }
 
         viewModel.bids.observe(viewLifecycleOwner) {
             when(it) {
                 is Resource.Success -> {
 //                    binding.bidsProgressBar.visible(false)
-                    binding.bidTextView.text = it.value.toString()
+                    bidListAdapter.submitList(it.value.toList())
                 }
                 is Resource.Loading -> {
 //                    binding.bidsProgressBar.visible(true)
@@ -43,7 +52,7 @@ class BidFragment : BaseFragment<BidViewModel, FragmentBidBinding, BidRepository
             }
 
         }
-        Log.d("Bids", "Bids related to product: " + viewModel.bids.value)
+
 
     }
 
