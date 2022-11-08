@@ -10,7 +10,7 @@ interface BidApi {
     @GET("bids/{bidId}")
     suspend fun getBidByBidId(@Path("bidId") bidId: String): BidResponse
 
-    @GET("bids/products/{productId}")
+    @GET("bids/product/{productId}")
     suspend fun getBidsOnProduct(@Path("productId") userId: String): List<BidResponse>
 
     @GET("users/{userId}/products")
