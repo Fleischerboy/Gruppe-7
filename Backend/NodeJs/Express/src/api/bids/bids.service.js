@@ -1,4 +1,4 @@
-const { db } = require('../../utils/db');
+const { db } = require("../../utils/db");
 
 const getAllBids = () => {
   return db.bid.findMany();
@@ -8,6 +8,14 @@ const getBid = (id) => {
   return db.bid.findUnique({
     where: {
       id: id,
+    },
+  });
+};
+
+const getBidsOnProduct = (productId) => {
+  return db.bid.findMany({
+    where: {
+      productId: productId,
     },
   });
 };
@@ -42,4 +50,5 @@ module.exports = {
   getAllBids,
   getBid,
   acceptBid,
+  getBidsOnProduct,
 };
