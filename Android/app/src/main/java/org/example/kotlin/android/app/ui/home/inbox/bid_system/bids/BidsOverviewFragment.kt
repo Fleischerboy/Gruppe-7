@@ -5,15 +5,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.example.kotlin.android.app.data.repository.BidRepository
+import org.example.kotlin.android.app.data.responses.ProductResponse
 import org.example.kotlin.android.app.data.restapi.BidApi
 import org.example.kotlin.android.app.data.restapi.Resource
 import org.example.kotlin.android.app.databinding.FragmentBidsBinding
 import org.example.kotlin.android.app.ui.base.BaseFragment
 import org.example.kotlin.android.app.ui.handleApiError
+import org.example.kotlin.android.app.ui.home.explore.ProductInterface
 import org.example.kotlin.android.app.ui.visible
 
 class BidsOverviewFragment : BaseFragment<BidsViewModel,FragmentBidsBinding, BidRepository>() {
@@ -24,8 +28,16 @@ class BidsOverviewFragment : BaseFragment<BidsViewModel,FragmentBidsBinding, Bid
         val userId = runBlocking {userPreferences.getUserId.first()}.toString()
         viewModel.getAllProductsByUserId(userId)
         val productsWithBidAdapter = ProductsWithBidListAdapter()
-        Log.d("Print", "value: " + viewModel.ownersProducts.value)
-        binding.textViewBids.text = "WTF!"
+
+        productsWithBidAdapter.setOnClickListener(object : ProductInterface {
+            override fun onItemClickListener(product: ProductResponse) {
+                val productId = product.id
+                val action = BidsOverviewFragmentDirections.actionBidsFragmentToBidFragment(productId)
+                findNavController().navigate(action)
+            }
+        })
+
+
 
         binding.apply {
             binding.ProductWithBidsRecycler.apply {

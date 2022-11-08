@@ -10,6 +10,9 @@ class BidRepository(private val api: BidApi) : BaseRepository(){
         }
     }
 
+    suspend fun getBidsOnProduct(productId: String) = safeApiCall {
+        api.getBidsOnProduct(productId) }
+
     suspend fun getOwnersProductById(userId: String) = safeApiCall {
         api.getUserProductsById(userId) }
 

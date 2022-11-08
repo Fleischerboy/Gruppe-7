@@ -9,6 +9,7 @@ import org.example.kotlin.android.app.data.repository.*
 import org.example.kotlin.android.app.ui.auth.AuthViewModel
 import org.example.kotlin.android.app.ui.home.explore.ExploreViewModel
 import org.example.kotlin.android.app.ui.home.inbox.InboxViewModel
+import org.example.kotlin.android.app.ui.home.inbox.bid_system.bid.BidViewModel
 import org.example.kotlin.android.app.ui.home.inbox.bid_system.bids.BidsViewModel
 import org.example.kotlin.android.app.ui.home.inbox.chat_system.chat.ChatViewModel
 import org.example.kotlin.android.app.ui.home.inbox.chat_system.chats.ChatsViewModel
@@ -33,6 +34,7 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(ChatsViewModel::class.java) -> ChatsViewModel(repository as ChatsRepository) as T
             modelClass.isAssignableFrom(ChatViewModel::class.java) -> ChatViewModel(repository as ChatRepository) as T
            modelClass.isAssignableFrom(BidsViewModel::class.java) -> BidsViewModel(repository as BidRepository) as T
+           modelClass.isAssignableFrom(BidViewModel::class.java) -> BidViewModel(repository as BidRepository) as T
             else -> throw  IllegalArgumentException("ViewModelClass Not Found");
         }
     }

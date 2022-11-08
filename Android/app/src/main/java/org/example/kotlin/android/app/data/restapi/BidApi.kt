@@ -7,12 +7,15 @@ import retrofit2.http.Path
 
 interface BidApi {
 
-    @GET("api/bids/{bidId}")
+    @GET("bids/{bidId}")
     suspend fun getBidByBidId(@Path("bidId") bidId: String): BidResponse
 
-    //TODO Get bids from specific product
+    @GET("bids/products/{productId}")
+    suspend fun getBidsOnProduct(@Path("productId") userId: String): List<BidResponse>
+
     @GET("users/{userId}/products")
     suspend fun getUserProductsById(@Path("userId") userId: String): List<ProductResponse>
+
 
 
 }
