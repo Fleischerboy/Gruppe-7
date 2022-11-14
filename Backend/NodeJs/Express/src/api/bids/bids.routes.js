@@ -6,6 +6,7 @@ const {
   getAllBids,
   getBid,
   acceptBid,
+  getBidsOnProduct,
 } = require("../bids/bids.service");
 const { createChat } = require("../chat/chat.service");
 
@@ -38,8 +39,19 @@ router.get("/api/bids/:bidId", async (req, res) => {
   }
 });
 
-router.post("/api/products/:productId/createbid", async (req, res) => {
-  console.log("den kjørte");
+router.get("/api/bids/product/:productId", async (req, res) => {
+  try {
+    const productId = parseInt(req.params.productId);
+    const bids = await getBidsOnProduct(productId);
+    if (bids) return res.json(bids);
+    return res.status(404).send("No bids on product");
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send("Failed fetching bids");
+  }
+});
+
+router.post("/api/products/:productId/createbid", auth, async (req, res) => {
   try {
     const productId = parseInt(req.params.productId);
     const bidAmount = parseFloat(req.body.bidAmount);
