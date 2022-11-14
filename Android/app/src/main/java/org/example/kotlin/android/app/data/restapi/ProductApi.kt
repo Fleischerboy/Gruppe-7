@@ -1,6 +1,7 @@
 package org.example.kotlin.android.app.data.restapi
 
 import kotlinx.coroutines.flow.Flow
+import org.example.kotlin.android.app.data.requestsBody.Bid
 import org.example.kotlin.android.app.data.responses.BidResponse
 import org.example.kotlin.android.app.data.responses.ProductResponse
 import retrofit2.http.Body
@@ -18,10 +19,8 @@ interface ProductApi {
     suspend fun getProductById(@Path("productId") productId: Int): ProductResponse
 
 
-
-    @POST("products/{productId}/createBid")
-    suspend fun createBid(@Path("productId") productId: Int,
-                          @Body userId: String): BidResponse
+    @POST("products/{productId}/createbid")
+    suspend fun createBid(@Path("productId") productId: String, @Body bidData: Bid): BidResponse
 
     /*
     @GET("bids")

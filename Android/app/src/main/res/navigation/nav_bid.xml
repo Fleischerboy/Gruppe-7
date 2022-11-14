@@ -8,5 +8,18 @@
         android:id="@+id/bidsFragment"
         android:name="org.example.kotlin.android.app.ui.home.inbox.bid_system.bids.BidsOverviewFragment"
         android:label="fragment_bids"
-        tools:layout="@layout/fragment_bids" />
+        tools:layout="@layout/fragment_bids" >
+        <action
+            android:id="@+id/action_bidsFragment_to_bidFragment"
+            app:destination="@id/bidFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bidFragment"
+        android:name="org.example.kotlin.android.app.ui.home.inbox.bid_system.bid.BidFragment"
+        android:label="fragment_bid"
+        tools:layout="@layout/fragment_bid" >
+        <argument
+            android:name="uid"
+            app:argType="integer" />
+    </fragment>
 </navigation>

@@ -55,4 +55,9 @@
     <string name="Sell">Sell</string>
     <string name="Inbox">Inbox</string>
     <string name="Profile">Profile</string>
+    <string name="products_with_bid">Products with bid</string>
+    <string name="amount">Amount:</string>
+    <string name="bidAmount">0</string>
+    <string name="accept_bid">Accept Bid</string>
+    <string name="bidTextView">Bids</string>
 </resources>
