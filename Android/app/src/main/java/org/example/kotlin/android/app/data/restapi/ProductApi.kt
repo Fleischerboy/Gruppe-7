@@ -18,10 +18,8 @@ interface ProductApi {
     suspend fun getProductById(@Path("productId") productId: Int): ProductResponse
 
 
-
     @POST("products/{productId}/createBid")
-    suspend fun createBid(@Path("productId") productId: Int,
-                          @Body userId: String): BidResponse
+    suspend fun createBid(@Path("productId") productId: String, @Body bidAmount: String, @Body userId: Int): BidResponse
 
     /*
     @GET("bids")

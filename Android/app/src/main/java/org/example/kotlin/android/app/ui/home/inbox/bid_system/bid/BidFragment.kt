@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.example.kotlin.android.app.R
@@ -32,6 +33,7 @@ class BidFragment : BaseFragment<BidViewModel, FragmentBidBinding, BidRepository
         bidListAdapter.setOnClickListener(object : BidInterface {
             override fun onItemClickListener(bid: BidResponse) {
                 viewModel.acceptBid(bid.id.toString())
+                Toast.makeText(context,"A chat was created!",Toast.LENGTH_SHORT).show()
             }
         })
 

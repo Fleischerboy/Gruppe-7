@@ -1,94 +1,87 @@
-const express = require('express');
-const auth = require('../middleware/auth');
+const express = require("express");
+const auth = require("../middleware/auth");
 const router = express.Router();
 const {
   createBid,
   getAllBids,
   getBid,
   acceptBid,
-} = require('../bids/bids.service');
-const { createChat } = require('../chat/chat.service');
+} = require("../bids/bids.service");
+const { createChat } = require("../chat/chat.service");
 
-const { getProductById } = require('../products/products.service');
+const { getProductById } = require("../products/products.service");
 
-router.get('/api/bids', async (req, res) => {
+router.get("/api/bids", async (req, res) => {
   try {
     const bids = await getAllBids();
     if (bids) {
       return res.json(bids);
     }
-    return res.status(404).send('did not find this resource');
+    return res.status(404).send("did not find this resource");
   } catch (err) {
     console.log(err);
-    return res.status(500).send('Failed finding bids');
+    return res.status(500).send("Failed finding bids");
   }
 });
 
-router.get('/api/bids/:bidId', async (req, res) => {
+router.get("/api/bids/:bidId", async (req, res) => {
   try {
     const bidId = parseInt(req.params.bidId);
     const bid = await getBid(bidId);
     if (bid) {
       return res.json(bid);
     }
-    return res.status(404).send('did not find this resource');
+    return res.status(404).send("did not find this resource");
   } catch (err) {
     console.log(err);
-    return res.status(500).send('failed finding bid');
+    return res.status(500).send("failed finding bid");
   }
 });
 
-router.post(
-  '/api/products/:productId/createbid',
-  auth,
-  async (req, res) => {
-    try {
-      const productId = parseInt(req.params.productId);
-      const bidAmount = parseFloat(req.body.bidAmount);
-      const bidUserId = req.body.userId;
+router.post("/api/products/:productId/createbid", auth, async (req, res) => {
+  try {
+    const productId = parseInt(req.params.productId);
+    const bidAmount = parseFloat(req.body.bidAmount);
+    const bidUserId = req.body.userId;
 
-      if (!(bidAmount && productId && bidUserId)) {
-        return res
-          .status(400)
-          .send(
-            'Missing required fields: bidAmount, productId and userId'
-          );
-      }
-
-      const getProduct = await getProductById(productId);
-
-      if (!getProduct)
-        return res.status(400).send('product not found');
-
-      const { id, ownerId } = getProduct;
-      const bid = await createBid({
-        id,
-        ownerId,
-        bidUserId,
-        bidAmount,
-      });
-      if (!bid) {
-        return res.status(500).send('Failed creating bid');
-      }
-      return res.status(201).json(bid);
-    } catch (err) {
-      console.log(err);
-      return res.status(500).send('Failed creating bid');
+    print(productId, bidAmount, bidUserId);
+    if (!(bidAmount && productId && bidUserId)) {
+      return res
+        .status(400)
+        .send("Missing required fields: bidAmount, productId and userId");
     }
-  }
-);
 
-router.put('/api/bids/:bidId/acceptBid', async (req, res) => {
+    const getProduct = await getProductById(productId);
+
+    if (!getProduct) return res.status(400).send("product not found");
+
+    const { id, ownerId } = getProduct;
+    const bid = await createBid({
+      id,
+      ownerId,
+      bidUserId,
+      bidAmount,
+    });
+    if (!bid) {
+      return res.status(500).send("Failed creating bid");
+    }
+    return res.status(201).json(bid);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send("Failed creating bid");
+  }
+});
+
+router.put("/api/bids/:bidId/acceptBid", async (req, res) => {
   try {
     const bidId = parseInt(req.params.bidId);
     const bid = await getBid(bidId);
 
-    if (!bid) return res.status(404).send('bid not found');
+    if (!bid) return res.status(404).send("bid not found");
 
     const accept = await acceptBid(bidId);
 
-    if (!accept)
-      return res.status(500).send('Failed to accept the bid');
+    if (!accept) return res.status(500).send("Failed to accept the bid");
 
     const { productOwnerId, bidUserId, productId } = accept;
     const createdChat = await createChat({
@@ -98,7 +91,7 @@ router.put('/api/bids/:bidId/acceptBid', async (req, res) => {
     });
 
     if (!createdChat) {
-      return res.status(500).send('Failed creating chat');
+      return res.status(500).send("Failed creating chat");
     }
 
     return res.status(201).json(createdChat);

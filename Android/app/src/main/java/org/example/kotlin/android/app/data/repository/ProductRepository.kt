@@ -32,6 +32,10 @@ class ProductRepository(
     }
 
 
+    suspend fun createBid(productId: String, bidAmount: String, userId: Int) = safeApiCall {
+        api.createBid(productId, bidAmount, userId)
+    }
+
 
     /*
     suspend fun getAllBids() = safeApiCall {
