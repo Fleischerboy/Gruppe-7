@@ -100,7 +100,8 @@ class ProductOverviewFragment : BaseFragment<ProductViewModel, FragmentProductOv
     ): FragmentProductOverviewBinding = FragmentProductOverviewBinding.inflate(inflater, container, false)
 
     override fun getFragmentRepository(): ProductRepository {
-        val api = remoteDataSource.buildServiceApi(ProductApi::class.java)
+        val token = runBlocking {  userPreferences.getAccessToken.first() }
+        val api = remoteDataSource.buildServiceApi(ProductApi::class.java, token)
         return ProductRepository(api)
     }
 
