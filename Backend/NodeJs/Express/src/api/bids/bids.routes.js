@@ -38,13 +38,13 @@ router.get("/api/bids/:bidId", async (req, res) => {
   }
 });
 
-router.post("/api/products/:productId/createbid", auth, async (req, res) => {
+router.post("/api/products/:productId/createbid", async (req, res) => {
+  console.log("den kjørte");
   try {
     const productId = parseInt(req.params.productId);
     const bidAmount = parseFloat(req.body.bidAmount);
     const bidUserId = req.body.userId;
 
-    print(productId, bidAmount, bidUserId);
     if (!(bidAmount && productId && bidUserId)) {
       return res
         .status(400)

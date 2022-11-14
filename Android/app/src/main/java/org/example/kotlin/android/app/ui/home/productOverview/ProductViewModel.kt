@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.example.kotlin.android.app.data.repository.ProductRepository
+import org.example.kotlin.android.app.data.requestsBody.Bid
 import org.example.kotlin.android.app.data.responses.BidResponse
 import org.example.kotlin.android.app.data.responses.ProductResponse
 import org.example.kotlin.android.app.data.restapi.Resource
@@ -27,8 +28,8 @@ class ProductViewModel(private val repository: ProductRepository) : BaseViewMode
         _product.value = repository.getProductById(productId);
     }
 
-    fun createBid(productId: String, bidAmount: String, bidUserId: Int) = viewModelScope.launch {
-        _bid.value = repository.createBid(productId, bidAmount, bidUserId)
+    fun createBid(productId: String, bid: Bid) = viewModelScope.launch {
+        _bid.value = repository.createBid(productId, bid)
     }
 
 }

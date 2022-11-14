@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 import kotlinx.coroutines.flow.flowOn
+import org.example.kotlin.android.app.data.requestsBody.Bid
 import org.example.kotlin.android.app.data.responses.ProductResponse
 import org.example.kotlin.android.app.data.restapi.ProductApi
 import org.example.kotlin.android.app.data.restapi.Resource
@@ -32,8 +33,8 @@ class ProductRepository(
     }
 
 
-    suspend fun createBid(productId: String, bidAmount: String, userId: Int) = safeApiCall {
-        api.createBid(productId, bidAmount, userId)
+    suspend fun createBid(productId: String, bid: Bid) = safeApiCall {
+        api.createBid(productId, bid)
     }
 
 

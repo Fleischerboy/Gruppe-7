@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.example.kotlin.android.app.R
 import org.example.kotlin.android.app.data.repository.ProductRepository
+import org.example.kotlin.android.app.data.requestsBody.Bid
 import org.example.kotlin.android.app.data.responses.BidResponse
 import org.example.kotlin.android.app.data.responses.ProductResponse
 import org.example.kotlin.android.app.data.restapi.ProductApi
@@ -41,9 +42,20 @@ class ProductOverviewFragment : BaseFragment<ProductViewModel, FragmentProductOv
                 is Resource.Success -> {
                     updateProductOverviewUI(it.value)
                     createBid(productId)
-
                 }
                 is Resource.Failure -> {
+                    handleApiError(it)
+                }
+            }
+        }
+        viewModel.bid.observe(viewLifecycleOwner) {
+            when(it) {
+                is Resource.Success -> {
+                    Toast.makeText(context,"You successfully bid: " + it.value.bidAmount, Toast.LENGTH_SHORT).show()
+                    binding.bidInput.text = null;
+                }
+                is Resource.Failure -> {
+                    Log.d("API fetch error", "Error code: " + it.errorCode)
                     handleApiError(it)
                 }
             }
@@ -54,21 +66,8 @@ class ProductOverviewFragment : BaseFragment<ProductViewModel, FragmentProductOv
         val userId = runBlocking {userPreferences.getUserId.first()}!!.toInt()
         binding.bidButton.setOnClickListener {
             val bidAmount = binding.bidInput.text.toString()
-            viewModel.createBid(productId.toString(), bidAmount, userId)
-            viewModel.bid.observe(viewLifecycleOwner) {
-                when(it) {
-                    is Resource.Success -> {
-                        Toast.makeText(context,"You successfully bid: " + it.value.bidAmount, Toast.LENGTH_SHORT).show()
-                    }
-                    is Resource.Failure -> {
-                        Log.d("API fetch error", "Error code: " + it.errorCode)
-                        handleApiError(it)
-                    }
-                }
-            }
-
-
-
+            val bid = Bid(bidAmount, userId)
+            viewModel.createBid(productId.toString(), bid)
         }
     }
 
