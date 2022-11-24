@@ -2,6 +2,7 @@ package org.example.kotlin.android.app.data.repository
 
 import org.example.kotlin.android.app.data.UserPreferences
 import org.example.kotlin.android.app.data.requestsBody.SignIn
+import org.example.kotlin.android.app.data.requestsBody.SignUp
 import org.example.kotlin.android.app.data.restapi.AuthApi
 
 /*
@@ -15,6 +16,10 @@ class AuthRepository(
 
     suspend fun signIn(userSignInData: SignIn) = safeApiCall {
         api.signIn(userSignInData);
+    }
+
+    suspend fun signUp(userSignUpData: SignUp) = safeApiCall {
+        api.signUp(userSignUpData);
     }
 
 
