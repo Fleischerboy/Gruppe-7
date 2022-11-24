@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import org.example.kotlin.android.app.data.restapi.Resource
 import org.example.kotlin.android.app.ui.auth.LoginFragment
+import org.example.kotlin.android.app.ui.auth.RegisterFragment
 import org.example.kotlin.android.app.ui.base.BaseFragment
 import org.example.kotlin.android.app.ui.home.sell.SellFragment
 import java.io.File
@@ -62,8 +63,13 @@ fun Fragment.handleApiError(failure: Resource.Failure,
              }
          }
         failure.errorCode == 400 -> {
-            if(this is LoginFragment || this is SellFragment) {
+            if(this is LoginFragment || this is SellFragment || this is RegisterFragment) {
                 requireView().snackbar("Missing required input")
+            }
+        }
+        failure.errorCode == 403 -> {
+            if(this is RegisterFragment) {
+                requireView().snackbar("Email already in use")
             }
         }
         else -> {

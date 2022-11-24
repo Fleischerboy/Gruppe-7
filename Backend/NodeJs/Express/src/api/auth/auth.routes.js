@@ -24,7 +24,7 @@ router.post("/api/signup", async (req, res, next) => {
     const existingUser = await findUserByEmail(email);
 
     if (existingUser) {
-      return res.status(400).send("Email already in use");
+      return res.status(403).send("Email already in use");
     }
 
     // Create user in our database
@@ -44,7 +44,6 @@ router.post("/api/signup", async (req, res, next) => {
 router.post("/api/signin", async (req, res, next) => {
   // Extracting password and email from request
   const { email, password } = req.body;
-
   // Validate user input
   if (!(email && password)) {
     return res.status(400).send("All input is required");
@@ -52,6 +51,7 @@ router.post("/api/signin", async (req, res, next) => {
 
   const getUser = await findUserByEmail(email);
 
+  console.log(getUser);
   if (
     getUser &&
     (await (getUser.encrypted_password ===

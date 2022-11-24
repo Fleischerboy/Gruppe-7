@@ -49,6 +49,7 @@ class BidFragment : BaseFragment<BidViewModel, FragmentBidBinding, BidRepository
             when(it) {
                 is Resource.Success -> {
 //                    binding.bidsProgressBar.visible(false)
+
                     bidListAdapter.submitList(it.value.toList())
                 }
                 is Resource.Loading -> {

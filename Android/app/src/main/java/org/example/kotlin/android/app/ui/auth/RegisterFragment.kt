@@ -7,46 +7,68 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import org.example.kotlin.android.app.R
 import org.example.kotlin.android.app.data.repository.AuthRepository
+import org.example.kotlin.android.app.data.requestsBody.SignUp
 import org.example.kotlin.android.app.data.restapi.AuthApi
+import org.example.kotlin.android.app.data.restapi.Resource
 import org.example.kotlin.android.app.databinding.FragmentRegisterBinding
 import org.example.kotlin.android.app.ui.base.BaseFragment
+import org.example.kotlin.android.app.ui.handleApiError
 
 
 class RegisterFragment : BaseFragment<AuthViewModel, FragmentRegisterBinding, AuthRepository>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        //inputs
-        val etSignUpFullName = view.findViewById<EditText>(R.id.etSignUpFullName);
-        val etSignUpEmail = view.findViewById<EditText>(R.id.etSignUpEmail);
-        val etSignUpPassword = view.findViewById<EditText>(R.id.etSignUpPassword);
+        viewModel.signUpResponse.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is Resource.Success -> {
+                    Toast.makeText(context,"user successfully created!", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Failure -> {
+                    handleApiError(it)
+                }
+            }
+        })
+
+
+        binding.signUpBtn.setOnClickListener() {
+            registerUser()
+            binding.etSignUpFullName.text = null
+            binding.etSignUpEmail.text = null
+            binding.etSignUpPassword.text = null
+        }
 
 
 
 
-
-        val signIn = view.findViewById<TextView>(R.id.tvSignIn);
-
-
-        signIn.setOnClickListener {
+        binding.tvSignIn.setOnClickListener {
             val navController = it.findNavController();
             val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment();
             navController.navigate(action);
 
         }
+    }
+
+    private fun registerUser() {
+       val fullName = binding.etSignUpFullName.text.toString()
+       val email = binding.etSignUpEmail.text.toString()
+       val password = binding.etSignUpPassword.text.toString()
+        val userRegisterData = SignUp(
+            userFullName = fullName,
+            userEmail = email,
+            userPassword = password,
+
+        )
+        println(userRegisterData)
+        viewModel.signUp(userRegisterData)
     }
 
     override fun getViewModel(): Class<AuthViewModel> {
