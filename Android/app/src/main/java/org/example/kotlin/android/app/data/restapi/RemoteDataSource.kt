@@ -13,7 +13,7 @@ class RemoteDataSource {
         // backend in the cloud: https://gruppe7-andorid-app-api.herokuapp.com/api/
         // here is url for local, but remember to start it!! : http://10.0.2.2:3000/api/
 
-        private const val BASE_URL = "https://gruppe7-andorid-app-api.herokuapp.com/api/"
+        private const val BASE_URL = "http://10.0.2.2:3000/api/"
     }
 
 

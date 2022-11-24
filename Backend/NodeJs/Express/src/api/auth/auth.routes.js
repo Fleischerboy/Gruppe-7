@@ -1,32 +1,30 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const jwt = require('jsonwebtoken');
-const { checkHashPassword } = require('../../utils/passwordHash');
+const jwt = require("jsonwebtoken");
+const { checkHashPassword } = require("../../utils/passwordHash");
 const {
   findUserByEmail,
   createUser,
   findUserById,
-} = require('../users/users.services');
+} = require("../users/users.services");
 
-router.post('/api/signup', async (req, res, next) => {
+router.post("/api/signup", async (req, res, next) => {
   try {
     // Get user input
     const { fullname, email, password } = req.body;
-    console.log(fullname, email, password);
 
     // Validate user input
     if (!(email && password && fullname)) {
-      res
+      return res
         .status(400)
-        .send('You must provide an full name, email and password.');
+        .send("You must provide an full name, email and password.");
     }
 
     // Validate if user exist in our database
     const existingUser = await findUserByEmail(email);
 
     if (existingUser) {
-      res.status(400);
-      throw new Error('Email already in use.');
+      return res.status(400).send("Email already in use");
     }
 
     // Create user in our database
@@ -41,16 +39,15 @@ router.post('/api/signup', async (req, res, next) => {
   } catch (err) {
     console.log(err);
   }
-}); 
+});
 
-
-router.post('/api/signin', async (req, res, next) => {
+router.post("/api/signin", async (req, res, next) => {
   // Extracting password and email from request
   const { email, password } = req.body;
 
   // Validate user input
   if (!(email && password)) {
-    return res.status(400).send('All input is required');
+    return res.status(400).send("All input is required");
   }
 
   const getUser = await findUserByEmail(email);
@@ -61,13 +58,9 @@ router.post('/api/signin', async (req, res, next) => {
       checkHashPassword(password, getUser.salt).passwordHash))
   ) {
     // create token
-    const token = jwt.sign(
-      { user_id: getUser.id },
-      process.env.TOKEN_KEY,
-      {
-        expiresIn: '10h',
-      }
-    );
+    const token = jwt.sign({ user_id: getUser.id }, process.env.TOKEN_KEY, {
+      expiresIn: "10h",
+    });
 
     const { id, fullname, email, createdAt, updatedAt } = getUser;
     res.status(200).json({
@@ -80,7 +73,7 @@ router.post('/api/signin', async (req, res, next) => {
     });
   } else {
     return res.status(401).json({
-      msg: 'Wrong email or password',
+      msg: "Wrong email or password",
     });
   }
 });
