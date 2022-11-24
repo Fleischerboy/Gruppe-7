@@ -3,6 +3,7 @@ package org.example.kotlin.android.app.data.restapi
 import org.example.kotlin.android.app.data.requestsBody.SignIn
 import org.example.kotlin.android.app.data.requestsBody.SignUp
 import org.example.kotlin.android.app.data.responses.LoginResponse
+import org.example.kotlin.android.app.data.responses.SignUpResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -21,11 +22,11 @@ interface AuthApi {
     // suspend bc we are going to use coroutines for out asynchronous calls
     // to call this function we need a coroutine
 
-    /* Todo
-    @POST("signup")
-    suspend fun signUp(@Body userSignUpData: SignUp):
 
-     */
+    @POST("signup")
+    suspend fun signUp(@Body userSignUpData: SignUp): SignUpResponse
+
+
 
 
 

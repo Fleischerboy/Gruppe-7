@@ -30,7 +30,7 @@ class MapsFragment : Fragment() {
          * user has installed Google Play services and returned to the app.
          */
         val location = LatLng(args.latitude.toDouble(), args.longitude.toDouble())
-        googleMap.addMarker(MarkerOptions().position(location).title("Marker in Sydney"))
+        googleMap.addMarker(MarkerOptions().position(location).title("Sellers location"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
     }
 

@@ -8,7 +8,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.example.kotlin.android.app.data.repository.AuthRepository
 import org.example.kotlin.android.app.data.requestsBody.SignIn
+import org.example.kotlin.android.app.data.requestsBody.SignUp
 import org.example.kotlin.android.app.data.responses.LoginResponse
+import org.example.kotlin.android.app.data.responses.SignUpResponse
 import org.example.kotlin.android.app.data.restapi.Resource
 import org.example.kotlin.android.app.ui.base.BaseViewModel
 
@@ -23,6 +25,8 @@ class AuthViewModel(private val repository: AuthRepository) : BaseViewModel(repo
     // Muteable live data where we can put the value.
     private val _loginResponse: MutableLiveData<Resource<LoginResponse>> = MutableLiveData()
 
+    private val _signUpResponse: MutableLiveData<Resource<SignUpResponse>> = MutableLiveData()
+
     //  Livedata: cannot change the live data directly, so we will access this live data outside this viewModel
     val loginResponse: LiveData<Resource<LoginResponse>>
         // is immutable (constant)
@@ -30,9 +34,15 @@ class AuthViewModel(private val repository: AuthRepository) : BaseViewModel(repo
         get() = _loginResponse
 
 
-    fun login(signin : SignIn) = viewModelScope.launch {
-        delay(1000)
-       _loginResponse.value = repository.signIn(signin)
+    val signUpResponse: LiveData<Resource<SignUpResponse>>
+        get() = _signUpResponse
+
+    fun login(signIn : SignIn) = viewModelScope.launch {
+       _loginResponse.value = repository.signIn(signIn)
+    }
+
+    fun signUp(signUp: SignUp) = viewModelScope.launch {
+        _signUpResponse.value = repository.signUp(signUp)
     }
 
 

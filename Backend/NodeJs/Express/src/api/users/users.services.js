@@ -1,10 +1,10 @@
-const { db } = require('../../utils/db');
-const uuid = require('uuid');
+const { db } = require("../../utils/db");
+const uuid = require("uuid");
 
 const {
   saltHashPassword,
   checkHashPassword,
-} = require('../../utils/passwordHash');
+} = require("../../utils/passwordHash");
 
 function findUserByEmail(email) {
   return db.user.findUnique({
@@ -43,7 +43,6 @@ function findUserById(id) {
       email: true,
       createdAt: true,
     },
-    
   });
 }
 

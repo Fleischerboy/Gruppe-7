@@ -34,6 +34,7 @@ class ProductOverviewFragment : BaseFragment<ProductViewModel, FragmentProductOv
         super.onViewCreated(view, savedInstanceState)
 
         val productId = (activity as ProductActivity).productId
+        val userId = runBlocking {userPreferences.getUserId.first()}!!.toInt()
 
         println(productId)
         viewModel.getProduct(productId);
@@ -42,13 +43,19 @@ class ProductOverviewFragment : BaseFragment<ProductViewModel, FragmentProductOv
             when(it) {
                 is Resource.Success -> {
                     updateProductOverviewUI(it.value)
-                    createBid(productId)
+                    binding.bidButton.setOnClickListener {
+                        createBid(productId, userId)
+                    }
+                    binding.mapsButton.setOnClickListener {
+                        navigateToMaps()
+                    }
                 }
                 is Resource.Failure -> {
                     handleApiError(it)
                 }
             }
         }
+
         viewModel.bid.observe(viewLifecycleOwner) {
             when(it) {
                 is Resource.Success -> {
@@ -63,13 +70,11 @@ class ProductOverviewFragment : BaseFragment<ProductViewModel, FragmentProductOv
         }
     }
 
-    private fun createBid(productId: Int) {
-        val userId = runBlocking {userPreferences.getUserId.first()}!!.toInt()
-        binding.bidButton.setOnClickListener {
-            val bidAmount = binding.bidInput.text.toString()
-            val bid = Bid(bidAmount, userId)
-            viewModel.createBid(productId.toString(), bid)
-        }
+    private fun createBid(productId: Int, userId: Int) {
+        val bidAmount = binding.bidInput.text.toString()
+        val bid = Bid(bidAmount, userId)
+        if (bidAmount.toDouble() <= 0) Toast.makeText(context,"The amount is to low to make a bid", Toast.LENGTH_LONG).show()
+        else viewModel.createBid(productId.toString(), bid)
     }
 
     private fun updateProductOverviewUI(product: ProductResponse) {
@@ -78,15 +83,14 @@ class ProductOverviewFragment : BaseFragment<ProductViewModel, FragmentProductOv
             description.text = product.description;
             currentBid.text = product.productPrice.toString()
             Picasso.get().load(product.imageUrl).into(imageView);
-//            mapsButton.text = product.location;
-            mapsButton.setOnClickListener {
-                val action = ProductOverviewFragmentDirections.actionProductOverviewFragmentToMapsFragment()
-                action.latitude = 59.132164F
-                action.longitude = 11.352F
-                findNavController().navigate(action)
-            }
-
         }
+    }
+
+    private fun navigateToMaps(){
+        val action = ProductOverviewFragmentDirections.actionProductOverviewFragmentToMapsFragment()
+        action.latitude = 59.132164F
+        action.longitude = 11.352F
+        findNavController().navigate(action)
     }
 
 

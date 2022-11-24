@@ -30,7 +30,7 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
         super.onViewCreated(view, savedInstanceState)
 
 
-
+88
         binding.progressbar.visible(false);
 
 
@@ -71,6 +71,10 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
     private fun login() {
         val email = binding.etLoginEmail.text.toString().trim();
         val password = binding.etLoginPassword.text.toString().trim();
+        val userLoginInfo = SignIn(
+            userEmail = email,
+            userPassword = password,
+        )
         val userLoginInfo1 = SignIn(
             userEmail = "philip.eiler@hotmail.com",
             userPassword = "missi123"
@@ -79,8 +83,6 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
             userEmail = "fred@hotmail.com",
             userPassword = "fred123"
         )
-
-        //TODO ADD INPUT VALIDATION
         viewModel.login(userLoginInfo1);
     }
 
