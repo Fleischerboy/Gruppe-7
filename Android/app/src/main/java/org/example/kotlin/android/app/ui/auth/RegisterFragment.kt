@@ -9,9 +9,13 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.navigation.findNavController
 import org.example.kotlin.android.app.R
+import org.example.kotlin.android.app.data.repository.AuthRepository
+import org.example.kotlin.android.app.data.restapi.AuthApi
+import org.example.kotlin.android.app.databinding.FragmentRegisterBinding
+import org.example.kotlin.android.app.ui.base.BaseFragment
 
 
-class RegisterFragment : Fragment() {
+class RegisterFragment : BaseFragment<AuthViewModel, FragmentRegisterBinding, AuthRepository>() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,4 +48,15 @@ class RegisterFragment : Fragment() {
 
         }
     }
+
+    override fun getViewModel(): Class<AuthViewModel> {
+        return AuthViewModel::class.java
+    }
+
+    override fun getFragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ) = FragmentRegisterBinding.inflate(inflater, container, false)
+
+    override fun getFragmentRepository(): AuthRepository = AuthRepository(remoteDataSource.buildServiceApi(AuthApi::class.java), userPreferences)
 }
