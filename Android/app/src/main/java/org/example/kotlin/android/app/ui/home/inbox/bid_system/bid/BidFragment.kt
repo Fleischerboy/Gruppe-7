@@ -17,6 +17,7 @@ import org.example.kotlin.android.app.data.restapi.Resource
 import org.example.kotlin.android.app.databinding.FragmentBidBinding
 import org.example.kotlin.android.app.ui.base.BaseFragment
 import org.example.kotlin.android.app.ui.handleApiError
+import org.example.kotlin.android.app.ui.visible
 
 
 class BidFragment : BaseFragment<BidViewModel, FragmentBidBinding, BidRepository>() {
@@ -48,12 +49,15 @@ class BidFragment : BaseFragment<BidViewModel, FragmentBidBinding, BidRepository
         viewModel.bids.observe(viewLifecycleOwner) {
             when(it) {
                 is Resource.Success -> {
-//                    binding.bidsProgressBar.visible(false)
+                    binding.bidProgressBar.visible(false)
 
                     bidListAdapter.submitList(it.value.toList())
+                    if (it.value.toList().isEmpty()) {
+                        binding.bidTextView.text = "No Bids on this product yet"
+                    }
                 }
                 is Resource.Loading -> {
-//                    binding.bidsProgressBar.visible(true)
+                    binding.bidProgressBar.visible(true)
                 }
                 is Resource.Failure -> {
                     handleApiError(it)
