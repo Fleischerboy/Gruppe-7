@@ -72,9 +72,14 @@ class ProductOverviewFragment : BaseFragment<ProductViewModel, FragmentProductOv
 
     private fun createBid(productId: Int, userId: Int) {
         val bidAmount = binding.bidInput.text.toString()
+        Log.d("parseError", bidAmount)
         val bid = Bid(bidAmount, userId)
-        if (bidAmount.toDouble() <= 0) Toast.makeText(context,"The amount is to low to make a bid", Toast.LENGTH_LONG).show()
-        else viewModel.createBid(productId.toString(), bid)
+        if (bidAmount.isEmpty()) {
+            Toast.makeText(context,"The amount is to low to make a bid", Toast.LENGTH_LONG).show()
+        }
+        else {
+            viewModel.createBid(productId.toString(), bid)
+        }
     }
 
     private fun updateProductOverviewUI(product: ProductResponse) {
